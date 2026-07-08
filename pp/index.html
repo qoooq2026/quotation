@@ -52,7 +52,6 @@
     overflow:hidden;
   }
 
-  /* hex lattice background */
   .lattice{
     position:absolute; inset:0;
     opacity:0.35;
@@ -99,7 +98,6 @@
     margin-top:18px;
   }
 
-  /* ---- Cover ---- */
   #cover{ align-items:flex-start; }
   .cover-tag{
     font-family:var(--mono);
@@ -114,7 +112,6 @@
   }
   .cover-meta .brand{ color:var(--ink); font-weight:500; }
 
-  /* ---- nav dots ---- */
   .navdots{
     position:fixed; right:28px; top:50%; transform:translateY(-50%);
     display:flex; flex-direction:column; gap:14px; z-index:50;
@@ -132,7 +129,6 @@
   }
   .slidecount b{ color:var(--ink); }
 
-  /* ---- Overview numbers ---- */
   .stat-row{ display:flex; gap:60px; margin-top:10px; flex-wrap:wrap; }
   .stat{ min-width:180px; }
   .stat .num{ font-family:var(--grotesk); font-weight:700; font-size:clamp(56px,7vw,110px); color:var(--graphene); line-height:1; }
@@ -148,7 +144,19 @@
   }
   .pill b{ color:var(--ink); font-weight:500; }
 
-  /* ---- angle cards ---- */
+  .platform-row{
+    margin-top:22px; display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+  }
+  .platform-label{
+    font-family:var(--mono); font-size:11px; color:var(--mute-2); letter-spacing:0.1em; margin-right:6px;
+  }
+  .platform-chip{
+    font-family:var(--mono); font-size:12.5px; padding:8px 16px; border-radius:8px;
+    background:var(--panel); border:1px solid var(--line-strong); color:var(--ink);
+    display:flex; align-items:center; gap:8px;
+  }
+  .platform-chip .dot{ width:6px; height:6px; border-radius:50%; background:var(--graphene); }
+
   .grid5{
     display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-top:10px;
   }
@@ -163,7 +171,6 @@
   .card .cdesc{ font-size:13px; color:var(--mute); line-height:1.7; }
   .card .ctag{ margin-top:auto; font-family:var(--mono); font-size:11px; color:var(--mute-2); }
 
-  /* ---- ad amplification ---- */
   .ad-wrap{ display:flex; gap:70px; align-items:center; flex-wrap:wrap; }
   .ad-left{ flex:1; min-width:320px; }
   .ad-right{
@@ -181,7 +188,6 @@
   .ad-right li:last-child{ border-bottom:none; }
   .ad-right li .check{ color:var(--graphene); font-family:var(--mono); }
 
-  /* ---- workflow ---- */
   .flow{ display:flex; align-items:stretch; gap:0; margin-top:20px; flex-wrap:wrap; }
   .flow-step{
     flex:1; min-width:150px; padding:22px 18px; border-top:1px solid var(--line-strong);
@@ -198,14 +204,15 @@
     border-left:2px solid var(--graphene); padding-left:14px;
   }
 
-  /* ---- spec ---- */
-  .spec-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px; }
+  .spec-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:20px; }
   .spec-box{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:30px;}
   .spec-box .stitle{ font-family:var(--mono); font-size:12px; color:var(--mute); letter-spacing:0.1em; }
   .spec-box .sval{ font-family:var(--grotesk); font-weight:700; font-size:40px; color:var(--ink); margin-top:10px;}
   .spec-box .snote{ font-size:13px; color:var(--mute); margin-top:12px; line-height:1.7;}
+  .spec-box .plat-list{ margin-top:10px; display:flex; flex-direction:column; gap:8px;}
+  .spec-box .plat-list span{ font-family:var(--mono); font-size:14px; color:var(--ink); display:flex; align-items:center; gap:8px;}
+  .spec-box .plat-list span::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--graphene); flex-shrink:0;}
 
-  /* ---- pricing ---- */
   .plans{ display:flex; gap:26px; margin-top:14px; flex-wrap:wrap; }
   .plan{
     flex:1; min-width:340px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
@@ -220,7 +227,6 @@
   .plan li{ font-size:13.5px; color:var(--mute); padding:9px 0; border-bottom:1px dashed var(--line); }
   .plan li b{ color:var(--ink); font-weight:500;}
 
-  /* ---- calculator ---- */
   .calc-wrap{ margin-top:16px; }
   .calc-slider{ width:100%; max-width:720px; }
   .calc-slider input[type=range]{
@@ -246,7 +252,6 @@
   .preset-btn:hover, .preset-btn.on{ border-color:var(--graphene); color:var(--graphene); }
   .calc-note{ margin-top:30px; font-size:12.5px; color:var(--mute-2); max-width:600px; line-height:1.8;}
 
-  /* ---- closing ---- */
   #closing{ align-items:flex-start; justify-content:center; }
   .closing-cta{ margin-top:40px; display:flex; gap:40px; flex-wrap:wrap; }
   .contact-item{ font-family:var(--mono); font-size:14px; color:var(--mute); }
@@ -271,7 +276,6 @@
 
 <div class="deck" id="deck">
 
-  <!-- 1 COVER -->
   <section id="cover">
     <svg class="lattice" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
       <defs>
@@ -294,7 +298,6 @@
     </div>
   </section>
 
-  <!-- 2 OVERVIEW -->
   <section id="overview">
     <div class="content">
       <div class="eyebrow">01 · 專案總覽</div>
@@ -318,11 +321,17 @@
         <div class="pill">KOC 素人帳號投稿，非官方帳號</div>
         <div class="pill">全程可額外加碼至 <b>40 支</b></div>
       </div>
+      <div class="platform-row">
+        <span class="platform-label">主力曝光平台</span>
+        <div class="platform-chip"><span class="dot"></span>TikTok</div>
+        <div class="platform-chip"><span class="dot"></span>IG Reels</div>
+        <div class="platform-chip"><span class="dot"></span>YouTube Shorts</div>
+        <div class="platform-chip"><span class="dot"></span>Threads</div>
+      </div>
       <div class="lede">用足夠的內容密度，讓「PP石墨烯塑崩褲」在同一時間被不同的人、用不同的角度反覆看到——這是短影音矩陣最有效的地方：不是靠一支爆款，而是靠數量堆出來的信任感。</div>
     </div>
   </section>
 
-  <!-- 3 ANGLES -->
   <section id="angles">
     <div class="content">
       <div class="eyebrow">02 · 切入點</div>
@@ -362,13 +371,12 @@
     </div>
   </section>
 
-  <!-- 4 AD AMPLIFICATION -->
   <section id="ads">
     <div class="content">
       <div class="ad-wrap">
         <div class="ad-left">
           <div class="eyebrow">03 · 廣告加碼投放</div>
-          <h2>若有額外預算，素材直接給我司投 Meta 廣告——不加收授權費</h2>
+          <h2>若有額外預算，素材直接給我司投放 Meta 廣告——不加收授權費</h2>
           <div class="lede">我們已經驗證過：這類超短影音素材在 Meta 廣告上的成效相當亮眼。素人視角＋真實情境，本身就比制式廣告素材更容易被平台系統與受眾接受。</div>
         </div>
         <div class="ad-right">
@@ -384,7 +392,6 @@
     </div>
   </section>
 
-  <!-- 5 WORKFLOW -->
   <section id="workflow">
     <div class="content">
       <div class="eyebrow">04 · 執行流程</div>
@@ -401,7 +408,6 @@
     </div>
   </section>
 
-  <!-- 6 SPEC -->
   <section id="spec">
     <div class="content">
       <div class="eyebrow">05 · 規格與彈性</div>
@@ -417,11 +423,20 @@
           <div class="sval">40<small style="font-size:16px;color:var(--mute);"> 支</small></div>
           <div class="snote">基礎 30 支為保底量，若自然成效不佳，最多額外補到 40 支，不另收費。</div>
         </div>
+        <div class="spec-box">
+          <div class="stitle">主力曝光平台</div>
+          <div class="plat-list">
+            <span>TikTok</span>
+            <span>IG Reels</span>
+            <span>YouTube Shorts</span>
+            <span>Threads</span>
+          </div>
+          <div class="snote">四大平台同步鋪貨，覆蓋不同族群的滑動習慣與觀看場景。</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 7 PRICING -->
   <section id="pricing">
     <div class="content">
       <div class="eyebrow">06 · 預算方案</div>
@@ -443,8 +458,8 @@
           <div class="ptitle">執行費＋曝光計價</div>
           <div class="pprice">20<small> 萬元執行費 + 0.6 元／曝光</small></div>
           <ul>
-            <li>曝光計價<b>上限 30 萬元(50萬次曝光)</b>（超過不再計費）</li>
-            <li>成效越好，客戶付出的曝光成本比例越低；相反成效差，費用也比較合理</li>
+            <li>曝光計價<b>上限 30 萬元（50 萬次曝光）</b>，超過不再計價</li>
+            <li>成效越好，客戶付出的曝光成本比例越低；相反成效較差，費用也比較合理</li>
             <li>包含 30 支影音＋30 篇脆文</li>
             <li>適合<b>看重曝光量、願意共擔成效</b>的客戶</li>
           </ul>
@@ -453,7 +468,6 @@
     </div>
   </section>
 
-  <!-- 8 CALCULATOR -->
   <section id="calc">
     <div class="content">
       <div class="eyebrow">07 · 曝光試算</div>
@@ -482,11 +496,10 @@
           </div>
         </div>
       </div>
-      <div class="calc-note">試算公式：20 萬執行費 ＋（曝光次數 × 0.6 元），其中曝光計價部分上限為 30 萬元，超過則不再計價。以上為試算示意，實際結算以成效數據為準。</div>
+      <div class="calc-note">試算公式：20 萬執行費 ＋（曝光次數 × 0.6 元），其中曝光計價部分上限為 30 萬元（相當於 50 萬次曝光），超過則不再計價。以上為試算示意，實際結算以成效數據為準。</div>
     </div>
   </section>
 
-  <!-- 9 CLOSING -->
   <section id="closing">
     <div class="content">
       <div class="eyebrow">08 · 聯繫窗口</div>
@@ -525,7 +538,6 @@
   }, {root: document.getElementById('deck'), threshold:0.6});
   sections.forEach(s=>io.observe(s));
 
-  // Calculator
   const slider = document.getElementById('impSlider');
   const roImp = document.getElementById('roImp');
   const roCap = document.getElementById('roCap');
