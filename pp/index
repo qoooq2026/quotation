@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP石墨烯塑崩褲 × QoooQ 短影音提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0D1012;
+    --panel:#171B1D;
+    --panel-2:#1F2426;
+    --line:rgba(245,243,238,0.10);
+    --line-strong:rgba(245,243,238,0.18);
+    --graphene:#3CE8CC;
+    --graphene-dim:rgba(60,232,204,0.14);
+    --ember:#FF6B45;
+    --ember-dim:rgba(255,107,69,0.14);
+    --ink:#F5F3EE;
+    --mute:#8B9298;
+    --mute-2:#5C6367;
+    --display: 'Noto Sans TC', sans-serif;
+    --grotesk: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--ink);
+    font-family:var(--display);
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--graphene); color:#0D1012;}
+
+  .deck{
+    height:100vh;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+  }
+  section{
+    height:100vh;
+    width:100%;
+    scroll-snap-align:start;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding: 6vh 8vw;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+
+  /* hex lattice background */
+  .lattice{
+    position:absolute; inset:0;
+    opacity:0.35;
+    pointer-events:none;
+    z-index:0;
+  }
+  .content{ position:relative; z-index:2; }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.28em;
+    color:var(--graphene);
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px; height:1px; background:var(--graphene);
+  }
+
+  h1{
+    font-family:var(--grotesk);
+    font-weight:700;
+    font-size:clamp(38px, 6vw, 84px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+  h1 .cjk{ font-family:var(--display); font-weight:900; }
+
+  h2{
+    font-family:var(--display);
+    font-weight:900;
+    font-size:clamp(26px, 3.4vw, 46px);
+    line-height:1.3;
+    margin-bottom:28px;
+  }
+  .lede{
+    font-size:clamp(15px, 1.35vw, 19px);
+    color:var(--mute);
+    max-width:640px;
+    line-height:1.9;
+    margin-top:18px;
+  }
+
+  /* ---- Cover ---- */
+  #cover{ align-items:flex-start; }
+  .cover-tag{
+    font-family:var(--mono);
+    font-size:13px; color:var(--mute); letter-spacing:0.08em;
+    margin-top:26px;
+  }
+  .cover-meta{
+    position:absolute; bottom:6vh; left:8vw; right:8vw;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    font-family:var(--mono); font-size:12px; color:var(--mute-2);
+    z-index:2;
+  }
+  .cover-meta .brand{ color:var(--ink); font-weight:500; }
+
+  /* ---- nav dots ---- */
+  .navdots{
+    position:fixed; right:28px; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:14px; z-index:50;
+  }
+  .navdots button{
+    width:8px; height:8px; border-radius:50%;
+    border:1px solid var(--mute-2); background:transparent;
+    cursor:pointer; padding:0; transition:all .25s;
+  }
+  .navdots button.active{ background:var(--graphene); border-color:var(--graphene); transform:scale(1.3); }
+
+  .slidecount{
+    position:fixed; left:28px; bottom:26px; z-index:50;
+    font-family:var(--mono); font-size:12px; color:var(--mute-2);
+  }
+  .slidecount b{ color:var(--ink); }
+
+  /* ---- Overview numbers ---- */
+  .stat-row{ display:flex; gap:60px; margin-top:10px; flex-wrap:wrap; }
+  .stat{ min-width:180px; }
+  .stat .num{ font-family:var(--grotesk); font-weight:700; font-size:clamp(56px,7vw,110px); color:var(--graphene); line-height:1; }
+  .stat .label{ font-family:var(--mono); font-size:13px; color:var(--mute); margin-top:10px; letter-spacing:0.05em;}
+  .stat .unit{ font-size:0.35em; color:var(--mute); margin-left:6px; font-family:var(--display); font-weight:700;}
+
+  .cadence{
+    margin-top:56px; display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .pill{
+    font-family:var(--mono); font-size:13px; padding:10px 18px;
+    border:1px solid var(--line-strong); border-radius:999px; color:var(--mute);
+  }
+  .pill b{ color:var(--ink); font-weight:500; }
+
+  /* ---- angle cards ---- */
+  .grid5{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-top:10px;
+  }
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px;
+    padding:26px 20px; display:flex; flex-direction:column; gap:14px; min-height:230px;
+    transition:border-color .3s, transform .3s;
+  }
+  .card:hover{ border-color:var(--graphene); transform:translateY(-4px); }
+  .card .idx{ font-family:var(--mono); font-size:12px; color:var(--graphene); }
+  .card .ctitle{ font-family:var(--display); font-weight:700; font-size:17px; line-height:1.4; }
+  .card .cdesc{ font-size:13px; color:var(--mute); line-height:1.7; }
+  .card .ctag{ margin-top:auto; font-family:var(--mono); font-size:11px; color:var(--mute-2); }
+
+  /* ---- ad amplification ---- */
+  .ad-wrap{ display:flex; gap:70px; align-items:center; flex-wrap:wrap; }
+  .ad-left{ flex:1; min-width:320px; }
+  .ad-right{
+    flex:1; min-width:320px; background:var(--panel); border:1px solid var(--line);
+    border-radius:16px; padding:34px; position:relative;
+  }
+  .ad-right .flag{
+    position:absolute; top:-12px; right:24px; background:var(--ember); color:#1a0d08;
+    font-family:var(--mono); font-size:11px; padding:5px 14px; border-radius:999px; font-weight:700;
+  }
+  .ad-right ul{ list-style:none; margin-top:10px; }
+  .ad-right li{
+    display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); font-size:14px; color:var(--ink);
+  }
+  .ad-right li:last-child{ border-bottom:none; }
+  .ad-right li .check{ color:var(--graphene); font-family:var(--mono); }
+
+  /* ---- workflow ---- */
+  .flow{ display:flex; align-items:stretch; gap:0; margin-top:20px; flex-wrap:wrap; }
+  .flow-step{
+    flex:1; min-width:150px; padding:22px 18px; border-top:1px solid var(--line-strong);
+    position:relative;
+  }
+  .flow-step:not(:last-child)::after{
+    content:'→'; position:absolute; right:-14px; top:20px; color:var(--mute-2); font-size:18px; z-index:3;
+  }
+  .flow-step .fnum{ font-family:var(--mono); color:var(--graphene); font-size:12px; }
+  .flow-step .flabel{ font-weight:700; margin-top:8px; font-size:15px; }
+  .flow-step .fdesc{ margin-top:6px; font-size:12.5px; color:var(--mute); line-height:1.6;}
+  .flow-note{
+    margin-top:36px; font-family:var(--mono); font-size:13px; color:var(--graphene);
+    border-left:2px solid var(--graphene); padding-left:14px;
+  }
+
+  /* ---- spec ---- */
+  .spec-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:20px; }
+  .spec-box{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:30px;}
+  .spec-box .stitle{ font-family:var(--mono); font-size:12px; color:var(--mute); letter-spacing:0.1em; }
+  .spec-box .sval{ font-family:var(--grotesk); font-weight:700; font-size:40px; color:var(--ink); margin-top:10px;}
+  .spec-box .snote{ font-size:13px; color:var(--mute); margin-top:12px; line-height:1.7;}
+
+  /* ---- pricing ---- */
+  .plans{ display:flex; gap:26px; margin-top:14px; flex-wrap:wrap; }
+  .plan{
+    flex:1; min-width:340px; background:var(--panel); border:1px solid var(--line); border-radius:18px;
+    padding:34px; display:flex; flex-direction:column;
+  }
+  .plan.highlight{ border-color:var(--graphene); background:linear-gradient(180deg, var(--graphene-dim), var(--panel) 40%);}
+  .plan .ptag{ font-family:var(--mono); font-size:12px; color:var(--mute); letter-spacing:0.1em;}
+  .plan .ptitle{ font-family:var(--display); font-weight:900; font-size:22px; margin-top:8px;}
+  .plan .pprice{ font-family:var(--grotesk); font-weight:700; font-size:38px; color:var(--graphene); margin-top:18px;}
+  .plan .pprice small{ font-family:var(--display); font-size:14px; color:var(--mute); font-weight:400;}
+  .plan ul{ list-style:none; margin-top:22px; flex:1;}
+  .plan li{ font-size:13.5px; color:var(--mute); padding:9px 0; border-bottom:1px dashed var(--line); }
+  .plan li b{ color:var(--ink); font-weight:500;}
+
+  /* ---- calculator ---- */
+  .calc-wrap{ margin-top:16px; }
+  .calc-slider{ width:100%; max-width:720px; }
+  .calc-slider input[type=range]{
+    width:100%; -webkit-appearance:none; height:4px; border-radius:2px;
+    background:var(--line-strong); outline:none;
+  }
+  .calc-slider input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:18px; height:18px; border-radius:50%;
+    background:var(--graphene); cursor:pointer; box-shadow:0 0 0 6px var(--graphene-dim);
+  }
+  .calc-readout{ display:flex; gap:60px; margin-top:34px; flex-wrap:wrap; }
+  .ro{ min-width:160px;}
+  .ro .rolabel{ font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:0.08em;}
+  .ro .rovalue{ font-family:var(--grotesk); font-weight:700; font-size:clamp(26px,3vw,40px); margin-top:8px;}
+  .ro .rovalue.cap{ color:var(--ember); }
+  .ro .rovalue.total{ color:var(--graphene); }
+  .presets{ display:flex; gap:12px; margin-top:26px; flex-wrap:wrap;}
+  .preset-btn{
+    font-family:var(--mono); font-size:12px; padding:9px 16px; border-radius:999px;
+    border:1px solid var(--line-strong); background:transparent; color:var(--mute); cursor:pointer;
+    transition:all .2s;
+  }
+  .preset-btn:hover, .preset-btn.on{ border-color:var(--graphene); color:var(--graphene); }
+  .calc-note{ margin-top:30px; font-size:12.5px; color:var(--mute-2); max-width:600px; line-height:1.8;}
+
+  /* ---- closing ---- */
+  #closing{ align-items:flex-start; justify-content:center; }
+  .closing-cta{ margin-top:40px; display:flex; gap:40px; flex-wrap:wrap; }
+  .contact-item{ font-family:var(--mono); font-size:14px; color:var(--mute); }
+  .contact-item b{ color:var(--ink); display:block; font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:6px;}
+
+  @media (max-width:860px){
+    .grid5{ grid-template-columns:1fr 1fr; }
+    .spec-grid{ grid-template-columns:1fr; }
+    .flow-step:not(:last-child)::after{ content:'↓'; right:auto; left:18px; top:auto; bottom:-14px; }
+    .navdots{ display:none; }
+    section{ padding:8vh 6vw; }
+  }
+  @media (max-width:560px){
+    .grid5{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="navdots" id="navdots"></div>
+<div class="slidecount" id="slidecount"><b>01</b> / 09</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 COVER -->
+  <section id="cover">
+    <svg class="lattice" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="hex" width="60" height="52" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
+          <polygon points="30,2 55,16 55,38 30,52 5,38 5,16" fill="none" stroke="#3CE8CC" stroke-width="0.6" opacity="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="1200" height="800" fill="url(#hex)"/>
+    </svg>
+    <div class="content">
+      <div class="eyebrow">QoooQ 夸克創意 × 短影音提案</div>
+      <h1><span class="cjk">PP石墨烯塑崩褲</span></h1>
+      <h1 style="color:var(--graphene); margin-top:6px;">短影音 <span style="color:var(--mute-2)">×</span> 脆文 矩陣提案</h1>
+      <div class="cover-tag">KOC 素人矩陣・通路導購・數據結案 一手包辦</div>
+    </div>
+    <div class="cover-meta">
+      <div>提案日期 <span class="brand">2026.07</span></div>
+      <div class="brand">QoooQ TAIWAN</div>
+      <div>Scroll ↓</div>
+    </div>
+  </section>
+
+  <!-- 2 OVERVIEW -->
+  <section id="overview">
+    <div class="content">
+      <div class="eyebrow">01 · 專案總覽</div>
+      <h2>一個月的量體，足以把話題燒起來</h2>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="num">30<span class="unit">支</span></div>
+          <div class="label">SHORT-FORM VIDEO / MONTH</div>
+        </div>
+        <div class="stat">
+          <div class="num">30<span class="unit">篇</span></div>
+          <div class="label">THREADS 脆文 / MONTH</div>
+        </div>
+        <div class="stat">
+          <div class="num">10<span class="unit">–15s</span></div>
+          <div class="label">單支影音長度</div>
+        </div>
+      </div>
+      <div class="cadence">
+        <div class="pill">多帳號同步 <b>每天發 1–2 部</b></div>
+        <div class="pill">KOC 素人帳號投稿，非官方帳號</div>
+        <div class="pill">全程可額外加碼至 <b>40 支</b></div>
+      </div>
+      <div class="lede">用足夠的內容密度，讓「PP石墨烯塑崩褲」在同一時間被不同的人、用不同的角度反覆看到——這是短影音矩陣最有效的地方：不是靠一支爆款，而是靠數量堆出來的信任感。</div>
+    </div>
+  </section>
+
+  <!-- 3 ANGLES -->
+  <section id="angles">
+    <div class="content">
+      <div class="eyebrow">02 · 切入點</div>
+      <h2>五個角度，覆蓋線上與線下的購買路徑</h2>
+      <div class="grid5">
+        <div class="card">
+          <div class="idx">01</div>
+          <div class="ctitle">通路挖寶</div>
+          <div class="cdesc">實拍店鋪貨架，模擬「逛街巧遇好物」的線下導購情境，降低廣告感。</div>
+          <div class="ctag">OFFLINE</div>
+        </div>
+        <div class="card">
+          <div class="idx">02</div>
+          <div class="ctitle">素人開箱分享</div>
+          <div class="cdesc">以第一人稱真實開箱、上身實測，用生活化語氣取代硬性推銷。</div>
+          <div class="ctag">UGC</div>
+        </div>
+        <div class="card">
+          <div class="idx">03</div>
+          <div class="ctitle">BA 實測 / 功效可視化</div>
+          <div class="cdesc">強調穿著前後對比畫面或材質功效展示，讓效果一眼可見。</div>
+          <div class="ctag">PROOF</div>
+        </div>
+        <div class="card">
+          <div class="idx">04</div>
+          <div class="ctitle">私訊領取優惠連結</div>
+          <div class="cdesc">留言 / 私訊互動導流，把觀看轉換成可追蹤的線上導購路徑。</div>
+          <div class="ctag">ONLINE</div>
+        </div>
+        <div class="card">
+          <div class="idx">05</div>
+          <div class="ctitle">多帳號同步宣傳</div>
+          <div class="cdesc">每日 1–2 部影音＋脆文同步發布，短時間內堆疊熱度與聲量。</div>
+          <div class="ctag">MOMENTUM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 AD AMPLIFICATION -->
+  <section id="ads">
+    <div class="content">
+      <div class="ad-wrap">
+        <div class="ad-left">
+          <div class="eyebrow">03 · 廣告加碼投放</div>
+          <h2>若有額外預算，素材直接投 Meta 廣告——不加收授權費</h2>
+          <div class="lede">我們已經驗證過：這類超短影音素材在 Meta 廣告上的成效相當亮眼。素人視角＋真實情境，本身就比制式廣告素材更容易被平台系統與受眾接受。</div>
+        </div>
+        <div class="ad-right">
+          <div class="flag">加碼投放</div>
+          <ul>
+            <li><span class="check">✓</span> KOC 素材可直接授權作為廣告素材投放</li>
+            <li><span class="check">✓</span> 不額外收取授權費</li>
+            <li><span class="check">✓</span> 素人視角實測，投放成效已多次驗證</li>
+            <li><span class="check">✓</span> 與自然曝光內容並行，擴大觸及</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 WORKFLOW -->
+  <section id="workflow">
+    <div class="content">
+      <div class="eyebrow">04 · 執行流程</div>
+      <h2>從腳本到結案報告，QoooQ 一手包辦</h2>
+      <div class="flow">
+        <div class="flow-step"><div class="fnum">STEP 1</div><div class="flabel">腳本發想</div><div class="fdesc">依五大切入點規劃每支影音走向</div></div>
+        <div class="flow-step"><div class="fnum">STEP 2</div><div class="flabel">拍攝</div><div class="fdesc">KOC 素人實地 / 實測拍攝</div></div>
+        <div class="flow-step"><div class="fnum">STEP 3</div><div class="flabel">剪輯</div><div class="fdesc">10–15 秒節奏剪輯，強化前 3 秒鉤子</div></div>
+        <div class="flow-step"><div class="fnum">STEP 4</div><div class="flabel">投稿</div><div class="fdesc">多組 KOC 帳號同步發布</div></div>
+        <div class="flow-step"><div class="fnum">STEP 5</div><div class="flabel">數據統計</div><div class="fdesc">每支影音曝光 / 互動追蹤</div></div>
+        <div class="flow-step"><div class="fnum">STEP 6</div><div class="flabel">結案報告</div><div class="fdesc">彙整成效與後續建議</div></div>
+      </div>
+      <div class="flow-note">若自然曝光成效不如預期，我們最多可額外加碼製作到 40 支影音，不需額外簽約。</div>
+    </div>
+  </section>
+
+  <!-- 6 SPEC -->
+  <section id="spec">
+    <div class="content">
+      <div class="eyebrow">05 · 規格與彈性</div>
+      <h2>內容規格</h2>
+      <div class="spec-grid">
+        <div class="spec-box">
+          <div class="stitle">單支影音長度</div>
+          <div class="sval">10–15<small style="font-size:16px;color:var(--mute);"> 秒</small></div>
+          <div class="snote">以短、快、強鉤子為主，符合短影音演算法偏好的完播節奏。</div>
+        </div>
+        <div class="spec-box">
+          <div class="stitle">彈性加碼上限</div>
+          <div class="sval">40<small style="font-size:16px;color:var(--mute);"> 支</small></div>
+          <div class="snote">基礎 30 支為保底量，若自然成效不佳，最多額外補到 40 支，不另收費。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 PRICING -->
+  <section id="pricing">
+    <div class="content">
+      <div class="eyebrow">06 · 預算方案</div>
+      <h2>兩種計價方式，二擇一</h2>
+      <div class="plans">
+        <div class="plan">
+          <div class="ptag">PLAN A</div>
+          <div class="ptitle">整包執行費</div>
+          <div class="pprice">40<small> 萬元（未稅）</small></div>
+          <ul>
+            <li>固定總價，<b>不含授權費</b></li>
+            <li>包含 30 支影音＋30 篇脆文</li>
+            <li>視成效可加碼至 40 支影音</li>
+            <li>適合追求<b>預算可控</b>的客戶</li>
+          </ul>
+        </div>
+        <div class="plan highlight">
+          <div class="ptag">PLAN B</div>
+          <div class="ptitle">執行費＋曝光計價</div>
+          <div class="pprice">20<small> 萬元執行費 + 0.6 元／曝光</small></div>
+          <ul>
+            <li>曝光計價<b>上限 30 萬次</b>（超過不再計費）</li>
+            <li>成效越好，客戶付出的曝光成本比例越低</li>
+            <li>包含 30 支影音＋30 篇脆文</li>
+            <li>適合<b>看重曝光量、願意共擔成效</b>的客戶</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 CALCULATOR -->
+  <section id="calc">
+    <div class="content">
+      <div class="eyebrow">07 · 曝光試算</div>
+      <h2>PLAN B 曝光試算表（可拖曳試算）</h2>
+      <div class="calc-wrap">
+        <div class="calc-slider">
+          <input type="range" id="impSlider" min="0" max="1000000" step="10000" value="100000">
+        </div>
+        <div class="presets">
+          <button class="preset-btn" data-val="10000">1 萬次</button>
+          <button class="preset-btn" data-val="100000">10 萬次</button>
+          <button class="preset-btn" data-val="1000000">100 萬次</button>
+        </div>
+        <div class="calc-readout">
+          <div class="ro">
+            <div class="rolabel">預估曝光次數</div>
+            <div class="rovalue" id="roImp">100,000</div>
+          </div>
+          <div class="ro">
+            <div class="rolabel">曝光計價金額（上限 30 萬）</div>
+            <div class="rovalue cap" id="roCap">60,000</div>
+          </div>
+          <div class="ro">
+            <div class="rolabel">總計（未稅）</div>
+            <div class="rovalue total" id="roTotal">260,000</div>
+          </div>
+        </div>
+      </div>
+      <div class="calc-note">試算公式：20 萬執行費 ＋（曝光次數 × 0.6 元），其中曝光計價部分上限為 30 萬元，超過則不再計價。以上為試算示意，實際結算以成效數據為準。</div>
+    </div>
+  </section>
+
+  <!-- 9 CLOSING -->
+  <section id="closing">
+    <div class="content">
+      <div class="eyebrow">08 · 聯繫窗口</div>
+      <h2 style="max-width:720px;">用足夠的內容密度，把 PP石墨烯塑崩褲 送進日常對話裡</h2>
+      <div class="lede">從腳本、拍攝、剪輯、投稿到結案報告，QoooQ 一手包辦，讓您只需要專注在看成效。</div>
+      <div class="closing-cta">
+        <div class="contact-item"><b>提案窗口</b>takara@ilha.tw</div>
+        <div class="contact-item"><b>公司網站</b>qoooq.tw</div>
+        <div class="contact-item"><b>QoooQ 夸克創意股份有限公司</b>短影音 × KOC 整合行銷</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const sections = Array.from(document.querySelectorAll('section'));
+  const navdots = document.getElementById('navdots');
+  const slidecount = document.getElementById('slidecount');
+  sections.forEach((s,i)=>{
+    const b = document.createElement('button');
+    b.addEventListener('click', ()=> s.scrollIntoView({behavior:'smooth'}));
+    navdots.appendChild(b);
+  });
+  const dots = Array.from(navdots.children);
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = sections.indexOf(e.target);
+        dots.forEach(d=>d.classList.remove('active'));
+        dots[idx].classList.add('active');
+        slidecount.innerHTML = '<b>' + String(idx+1).padStart(2,'0') + '</b> / ' + sections.length;
+      }
+    });
+  }, {root: document.getElementById('deck'), threshold:0.6});
+  sections.forEach(s=>io.observe(s));
+
+  // Calculator
+  const slider = document.getElementById('impSlider');
+  const roImp = document.getElementById('roImp');
+  const roCap = document.getElementById('roCap');
+  const roTotal = document.getElementById('roTotal');
+  const EXEC_FEE = 200000;
+  const RATE = 0.6;
+  const CAP = 300000;
+
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+
+  function update(val){
+    const imp = Number(val);
+    const rawImpCost = imp * RATE;
+    const impCost = Math.min(rawImpCost, CAP);
+    const total = EXEC_FEE + impCost;
+    roImp.textContent = fmt(imp) + ' 次';
+    roCap.textContent = fmt(impCost) + ' 元' + (rawImpCost > CAP ? '（已達上限）' : '');
+    roTotal.textContent = fmt(total) + ' 元';
+    slider.value = imp;
+    document.querySelectorAll('.preset-btn').forEach(btn=>{
+      btn.classList.toggle('on', Number(btn.dataset.val) === imp);
+    });
+  }
+
+  slider.addEventListener('input', (e)=> update(e.target.value));
+  document.querySelectorAll('.preset-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> update(btn.dataset.val));
+  });
+  update(100000);
+</script>
+</body>
+</html>
