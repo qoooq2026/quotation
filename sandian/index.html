@@ -34,15 +34,16 @@
   }
   ::selection{background:var(--gold); color:#fff;}
 
-  .deck{ height:100vh; overflow-y:scroll; scroll-snap-type:y mandatory; }
+  .deck{ height:100vh; height:100dvh; overflow-y:scroll; scroll-snap-type:y mandatory; }
   section{
-    height:100vh; width:100%;
+    min-height:100vh; min-height:100dvh; width:100%;
     scroll-snap-align:start;
+    scroll-snap-stop:always;
     position:relative;
     display:flex; flex-direction:column; justify-content:center;
-    padding:6vh 8vw;
+    padding:8vh 8vw;
     border-bottom:1px solid var(--line);
-    overflow:hidden;
+    overflow:visible;
     background:var(--cream);
   }
   section.tone-blush{ background:linear-gradient(180deg, var(--paper), #F8EFEA); }
@@ -170,9 +171,22 @@
     .grid4{ grid-template-columns:1fr 1fr; }
     .flow-step:not(:last-child)::after{ content:'↓'; right:auto; left:18px; top:auto; bottom:-14px; }
     .navdots{ display:none; }
-    section{ padding:8vh 6vw; }
+    .slidecount{ display:none; }
+    .deck{ scroll-snap-type:y proximity; }
+    section{ padding:9vh 6vw 7vh; }
+    h1{ font-size:clamp(30px,8vw,52px); }
+    h2{ font-size:clamp(22px,5.6vw,32px); margin-bottom:20px; }
+    .stat-row{ gap:34px; }
+    .cadence{ gap:10px; margin-top:34px; }
+    .platform-row{ gap:8px; margin-top:18px; }
+    .cover-meta{ flex-direction:column; align-items:flex-start; gap:8px; bottom:4vh; }
+    .closing-cta{ gap:26px; }
   }
-  @media (max-width:560px){ .grid4{ grid-template-columns:1fr; } }
+  @media (max-width:560px){
+    .grid4{ grid-template-columns:1fr; }
+    .stat-row{ gap:26px; }
+    .stat .num{ font-size:clamp(42px,15vw,64px); }
+  }
 </style>
 </head>
 <body>
@@ -241,7 +255,7 @@
         <div class="card">
           <div class="idx">01</div>
           <div class="ctitle">素人開箱分享<br>真實使用感受</div>
-          <div class="cdesc">好推、好吸收、不黏膩、不悶不油——這些都要「用影片」呈現，例如上手臂推開、上臉後觸感特寫，而不是單靠口述。</div>
+          <div class="cdesc">好推、好吸收、不黏膩、不悶不油——這些都要「用拍的」呈現，例如上手臂推開、上臉後觸感特寫，而不是單靠口述。</div>
           <div class="ctag">UGC · TEXTURE</div>
         </div>
         <div class="card">
