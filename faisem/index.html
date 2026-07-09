@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faisem 口噴香霧 × QoooQ 短影音提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F1EA;
+    --paper:#FBF7F2;
+    --panel:#FFFFFF;
+    --line:rgba(43,35,32,0.10);
+    --line-strong:rgba(43,35,32,0.18);
+    --peach:#C98A78;
+    --peach-dim:rgba(201,138,120,0.14);
+    --sage:#8FA37E;
+    --sage-dim:rgba(143,163,126,0.16);
+    --ink:#2B2320;
+    --mute:#8A7C74;
+    --mute-2:#B3A79D;
+    --serif:'Noto Serif TC', serif;
+    --sans:'Noto Sans TC', sans-serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--peach); color:#fff;}
+
+  .deck{ height:100vh; overflow-y:scroll; scroll-snap-type:y mandatory; }
+  section{
+    height:100vh; width:100%;
+    scroll-snap-align:start;
+    position:relative;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:6vh 8vw;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    background:var(--cream);
+  }
+  section.tone-sage{ background:linear-gradient(180deg, var(--paper), #F3F6EF); }
+  section.tone-peach{ background:linear-gradient(180deg, var(--paper), #FBEFEA); }
+
+  .grain{
+    position:absolute; inset:0; opacity:0.5; pointer-events:none; z-index:0;
+    background-image:radial-gradient(rgba(43,35,32,0.035) 1px, transparent 1px);
+    background-size:3px 3px;
+  }
+  .content{ position:relative; z-index:2; }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.26em;
+    color:var(--peach); text-transform:uppercase; margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--peach); }
+  .eyebrow.is-sage{ color:var(--sage); }
+  .eyebrow.is-sage::before{ background:var(--sage); }
+
+  h1{ font-family:var(--serif); font-weight:900; font-size:clamp(34px,5.4vw,72px); line-height:1.25; letter-spacing:0.01em; }
+  h2{ font-family:var(--serif); font-weight:700; font-size:clamp(24px,3.1vw,42px); line-height:1.4; margin-bottom:26px; }
+  .lede{ font-size:clamp(14.5px,1.3vw,18px); color:var(--mute); max-width:600px; line-height:2; margin-top:16px; }
+
+  #cover{ align-items:flex-start; }
+  .cover-tag{ font-family:var(--mono); font-size:12.5px; color:var(--mute); letter-spacing:0.08em; margin-top:24px; }
+  .cover-hashtag{ font-family:var(--serif); font-style:italic; font-size:17px; color:var(--peach); margin-top:30px; }
+  .cover-meta{
+    position:absolute; bottom:6vh; left:8vw; right:8vw;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    font-family:var(--mono); font-size:11.5px; color:var(--mute-2); z-index:2;
+  }
+  .cover-meta .brand{ color:var(--ink); font-weight:500; }
+
+  .navdots{ position:fixed; right:28px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:14px; z-index:50; }
+  .navdots button{ width:8px; height:8px; border-radius:50%; border:1px solid var(--mute-2); background:transparent; cursor:pointer; padding:0; transition:all .25s; }
+  .navdots button.active{ background:var(--peach); border-color:var(--peach); transform:scale(1.3); }
+  .slidecount{ position:fixed; left:28px; bottom:26px; z-index:50; font-family:var(--mono); font-size:12px; color:var(--mute-2); }
+  .slidecount b{ color:var(--ink); }
+
+  .stat-row{ display:flex; gap:56px; margin-top:8px; flex-wrap:wrap; }
+  .stat{ min-width:150px; }
+  .stat .num{ font-family:var(--serif); font-weight:900; font-size:clamp(50px,6.4vw,96px); color:var(--peach); line-height:1; }
+  .stat .label{ font-family:var(--mono); font-size:12px; color:var(--mute); margin-top:10px; letter-spacing:0.05em;}
+  .stat .unit{ font-size:0.35em; color:var(--mute); margin-left:6px; font-family:var(--sans); font-weight:700;}
+
+  .cadence{ margin-top:50px; display:flex; gap:14px; flex-wrap:wrap; }
+  .pill{ font-family:var(--mono); font-size:12.5px; padding:9px 16px; border:1px solid var(--line-strong); border-radius:999px; color:var(--mute); background:var(--panel); }
+  .pill b{ color:var(--ink); font-weight:500; }
+
+  .platform-row{ margin-top:22px; display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .platform-label{ font-family:var(--mono); font-size:11px; color:var(--mute-2); letter-spacing:0.1em; margin-right:4px; }
+  .platform-chip{ font-family:var(--mono); font-size:12px; padding:7px 14px; border-radius:8px; background:var(--panel); border:1px solid var(--line-strong); color:var(--ink); display:flex; align-items:center; gap:7px; }
+  .platform-chip .dot{ width:6px; height:6px; border-radius:50%; background:var(--sage); }
+
+  .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:8px; }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:26px 20px; display:flex; flex-direction:column; gap:14px; min-height:230px; transition:border-color .3s, transform .3s; }
+  .card:hover{ border-color:var(--peach); transform:translateY(-4px); }
+  .card .idx{ font-family:var(--mono); font-size:12px; color:var(--peach); }
+  .card .ctitle{ font-family:var(--serif); font-weight:700; font-size:17px; line-height:1.5; }
+  .card .cdesc{ font-size:13px; color:var(--mute); line-height:1.75; }
+  .card .ctag{ margin-top:auto; font-family:var(--mono); font-size:10.5px; color:var(--mute-2); }
+
+  .ad-wrap{ display:flex; gap:70px; align-items:center; flex-wrap:wrap; }
+  .ad-left{ flex:1; min-width:320px; }
+  .ad-right{ flex:1; min-width:320px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:34px; position:relative; }
+  .ad-right .flag{ position:absolute; top:-12px; right:24px; background:var(--peach); color:#fff; font-family:var(--mono); font-size:11px; padding:5px 14px; border-radius:999px; font-weight:700; }
+  .ad-right ul{ list-style:none; margin-top:10px; }
+  .ad-right li{ display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); font-size:14px; color:var(--ink); }
+  .ad-right li:last-child{ border-bottom:none; }
+  .ad-right li .check{ color:var(--sage); font-family:var(--mono); }
+
+  .flow{ display:flex; align-items:stretch; gap:0; margin-top:16px; flex-wrap:wrap; }
+  .flow-step{ flex:1; min-width:150px; padding:22px 18px; border-top:1px solid var(--line-strong); position:relative; }
+  .flow-step:not(:last-child)::after{ content:'→'; position:absolute; right:-14px; top:20px; color:var(--mute-2); font-size:18px; z-index:3; }
+  .flow-step .fnum{ font-family:var(--mono); color:var(--peach); font-size:12px; }
+  .flow-step .flabel{ font-weight:700; margin-top:8px; font-size:15px; font-family:var(--serif); }
+  .flow-step .fdesc{ margin-top:6px; font-size:12.5px; color:var(--mute); line-height:1.6;}
+  .flow-note{ margin-top:34px; font-family:var(--mono); font-size:12.5px; color:var(--peach); border-left:2px solid var(--peach); padding-left:14px; }
+
+  .flex-compare{ display:flex; gap:24px; margin-top:14px; flex-wrap:wrap; }
+  .flex-box{ flex:1; min-width:300px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:28px; }
+  .flex-box.b{ border-color:var(--sage); background:linear-gradient(180deg, var(--sage-dim), var(--panel) 55%); }
+  .flex-box .ftag{ font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:0.1em; }
+  .flex-box .fttl{ font-family:var(--serif); font-weight:700; font-size:19px; margin-top:8px; }
+  .flex-box .fval{ font-family:var(--serif); font-weight:900; font-size:34px; color:var(--peach); margin-top:14px; }
+  .flex-box.b .fval{ color:var(--sage); }
+  .flex-box .fnote2{ font-size:13px; color:var(--mute); margin-top:12px; line-height:1.7; }
+
+  .plans{ display:flex; gap:26px; margin-top:10px; flex-wrap:wrap; }
+  .plan{ flex:1; min-width:340px; background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:34px; display:flex; flex-direction:column; }
+  .plan.highlight{ border-color:var(--sage); background:linear-gradient(180deg, var(--sage-dim), var(--panel) 40%); }
+  .plan .ptag{ font-family:var(--mono); font-size:12px; color:var(--mute); letter-spacing:0.1em; }
+  .plan .ptitle{ font-family:var(--serif); font-weight:900; font-size:21px; margin-top:8px; }
+  .plan .pprice{ font-family:var(--serif); font-weight:900; font-size:34px; color:var(--peach); margin-top:16px; }
+  .plan.highlight .pprice{ color:var(--sage); }
+  .plan .pprice small{ font-family:var(--sans); font-size:13.5px; color:var(--mute); font-weight:400; }
+  .plan ul{ list-style:none; margin-top:20px; flex:1; }
+  .plan li{ font-size:13.5px; color:var(--mute); padding:9px 0; border-bottom:1px dashed var(--line); }
+  .plan li b{ color:var(--ink); font-weight:500; }
+
+  .calc-wrap{ margin-top:10px; }
+  .calc-slider{ width:100%; max-width:680px; }
+  .calc-slider input[type=range]{ width:100%; -webkit-appearance:none; height:4px; border-radius:2px; background:var(--line-strong); outline:none; }
+  .calc-slider input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:var(--sage); cursor:pointer; box-shadow:0 0 0 6px var(--sage-dim); }
+  .calc-readout{ display:flex; gap:56px; margin-top:32px; flex-wrap:wrap; }
+  .ro{ min-width:150px; }
+  .ro .rolabel{ font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:0.08em; }
+  .ro .rovalue{ font-family:var(--serif); font-weight:900; font-size:clamp(24px,2.8vw,36px); margin-top:8px; }
+  .ro .rovalue.cap{ color:var(--peach); }
+  .ro .rovalue.total{ color:var(--sage); }
+  .presets{ display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; }
+  .preset-btn{ font-family:var(--mono); font-size:12px; padding:8px 15px; border-radius:999px; border:1px solid var(--line-strong); background:var(--panel); color:var(--mute); cursor:pointer; transition:all .2s; }
+  .preset-btn:hover, .preset-btn.on{ border-color:var(--sage); color:var(--sage); }
+  .calc-note{ margin-top:28px; font-size:12.5px; color:var(--mute-2); max-width:600px; line-height:1.8; }
+
+  #closing{ align-items:flex-start; justify-content:center; }
+  .closing-cta{ margin-top:36px; display:flex; gap:40px; flex-wrap:wrap; }
+  .contact-item{ font-family:var(--mono); font-size:13.5px; color:var(--mute); }
+  .contact-item b{ color:var(--ink); display:block; font-family:var(--serif); font-weight:700; font-size:15px; margin-bottom:6px; }
+
+  @media (max-width:860px){
+    .grid4{ grid-template-columns:1fr 1fr; }
+    .flow-step:not(:last-child)::after{ content:'↓'; right:auto; left:18px; top:auto; bottom:-14px; }
+    .navdots{ display:none; }
+    section{ padding:8vh 6vw; }
+  }
+  @media (max-width:560px){ .grid4{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="navdots" id="navdots"></div>
+<div class="slidecount" id="slidecount"><b>01</b> / 09</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 COVER -->
+  <section id="cover">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">QoooQ 夸克創意 × 短影音提案</div>
+      <h1>Faisem 口噴香霧</h1>
+      <h1 style="color:var(--peach); margin-top:4px;">短影音 <span style="color:var(--mute-2)">×</span> 脆文 快閃提案</h1>
+      <div class="cover-tag">2 週衝刺・KOC 素人矩陣・線上導購一手包辦</div>
+      <div class="cover-hashtag">「讓人想靠近你的近距離香氣」</div>
+    </div>
+    <div class="cover-meta">
+      <div>提案日期 <span class="brand">2026.07</span></div>
+      <div class="brand">QoooQ TAIWAN</div>
+      <div>Scroll ↓</div>
+    </div>
+  </section>
+
+  <!-- 2 OVERVIEW -->
+  <section id="overview" class="tone-peach">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">01 · 專案總覽</div>
+      <h2>短週期、高密度，2 週內把香氣話題衝起來</h2>
+      <div class="stat-row">
+        <div class="stat"><div class="num">2<span class="unit">週</span></div><div class="label">CAMPAIGN LENGTH</div></div>
+        <div class="stat"><div class="num">10<span class="unit">支</span></div><div class="label">SHORT-FORM VIDEO</div></div>
+        <div class="stat"><div class="num">10<span class="unit">篇</span></div><div class="label">THREADS 脆文</div></div>
+        <div class="stat"><div class="num">10<span class="unit">–15s</span></div><div class="label">單支影音長度</div></div>
+      </div>
+      <div class="cadence">
+        <div class="pill">多帳號同步 <b>每天發 1–2 部</b></div>
+        <div class="pill">KOC 素人帳號投稿，非官方帳號</div>
+        <div class="pill">產品線 <b>白桃烏龍 ／ 青柚</b> 雙香調</div>
+      </div>
+      <div class="platform-row">
+        <span class="platform-label">主力曝光平台</span>
+        <div class="platform-chip"><span class="dot"></span>TikTok</div>
+        <div class="platform-chip"><span class="dot"></span>IG Reels</div>
+        <div class="platform-chip"><span class="dot"></span>YouTube Shorts</div>
+        <div class="platform-chip"><span class="dot"></span>Threads</div>
+      </div>
+      <div class="lede">口噴香霧是一個需要「被聞到才有感」的產品，2 週的短週期加上高頻同步發布，是為了在最短時間內堆出足夠的討論密度，讓香氣話題先在社群裡發酵。</div>
+    </div>
+  </section>
+
+  <!-- 3 ANGLES -->
+  <section id="angles">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">02 · 切入點</div>
+      <h2>四個角度，從好奇到下單</h2>
+      <div class="grid4">
+        <div class="card">
+          <div class="idx">01</div>
+          <div class="ctitle">素人開箱分享<br>「XX 平替款」</div>
+          <div class="cdesc">用大眾熟悉的香水／香氛做對照，降低嘗試門檻，勾起「這個味道我知道」的好奇心。</div>
+          <div class="ctag">UGC · DUPE</div>
+        </div>
+        <div class="card">
+          <div class="idx">02</div>
+          <div class="ctitle">BA 畫面 / 功效放大</div>
+          <div class="cdesc">聚焦人際關係改善的小情境，或是好記、好用的隨身噴香小技巧，讓功效被「看見」而不只是被說出來。</div>
+          <div class="ctag">PROOF</div>
+        </div>
+        <div class="card">
+          <div class="idx">03</div>
+          <div class="ctitle">私訊領取優惠連結</div>
+          <div class="cdesc">留言 / 私訊互動導流，把「聞起來心動」的當下直接轉換成可追蹤的線上導購路徑。</div>
+          <div class="ctag">ONLINE</div>
+        </div>
+        <div class="card">
+          <div class="idx">04</div>
+          <div class="ctitle">多帳號同步宣傳</div>
+          <div class="cdesc">每日 1–2 部影音＋脆文同步發布，2 週內密集堆疊聲量，塑造話題熱度。</div>
+          <div class="ctag">MOMENTUM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 AD AMPLIFICATION -->
+  <section id="ads" class="tone-sage">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="ad-wrap">
+        <div class="ad-left">
+          <div class="eyebrow is-sage">03 · 廣告加碼投放</div>
+          <h2>若有額外預算，素材直接給我司投放 Meta 廣告——不加收授權費</h2>
+          <div class="lede">我們已經驗證過：這類超短影音素材在 Meta 廣告上的成效相當亮眼。素人視角＋真實情境，本身就比制式廣告素材更容易被平台系統與受眾接受。</div>
+        </div>
+        <div class="ad-right">
+          <div class="flag">加碼投放</div>
+          <ul>
+            <li><span class="check">✓</span> KOC 素材可直接授權作為廣告素材投放</li>
+            <li><span class="check">✓</span> 不額外收取授權費</li>
+            <li><span class="check">✓</span> 素人視角實測，投放成效已多次驗證</li>
+            <li><span class="check">✓</span> 與自然曝光內容並行，擴大觸及</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 WORKFLOW -->
+  <section id="workflow">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">04 · 執行流程</div>
+      <h2>從腳本到結案報告，QoooQ 一手包辦</h2>
+      <div class="flow">
+        <div class="flow-step"><div class="fnum">STEP 1</div><div class="flabel">腳本發想</div><div class="fdesc">依四大切入點規劃每支影音走向</div></div>
+        <div class="flow-step"><div class="fnum">STEP 2</div><div class="flabel">拍攝</div><div class="fdesc">KOC 素人實測拍攝</div></div>
+        <div class="flow-step"><div class="fnum">STEP 3</div><div class="flabel">剪輯</div><div class="fdesc">10–15 秒節奏剪輯，強化前 3 秒鉤子</div></div>
+        <div class="flow-step"><div class="fnum">STEP 4</div><div class="flabel">投稿</div><div class="fdesc">多組 KOC 帳號同步發布</div></div>
+        <div class="flow-step"><div class="fnum">STEP 5</div><div class="flabel">數據統計</div><div class="fdesc">每支影音曝光 / 互動追蹤</div></div>
+        <div class="flow-step"><div class="fnum">STEP 6</div><div class="flabel">結案報告</div><div class="fdesc">彙整成效與後續建議</div></div>
+      </div>
+      <div class="flow-note">單支影音以 10–15 秒為主，2 週衝刺檔期節奏緊湊，每日皆有新素材上線。</div>
+    </div>
+  </section>
+
+  <!-- 6 FLEXIBILITY -->
+  <section id="flex" class="tone-peach">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">05 · 規格與彈性</div>
+      <h2>兩種方案，加碼彈性不一樣</h2>
+      <div class="flex-compare">
+        <div class="flex-box">
+          <div class="ftag">PLAN A 適用</div>
+          <div class="fttl">整包執行費・固定加碼上限</div>
+          <div class="fval">15<small style="font-size:15px;color:var(--mute);"> 支封頂</small></div>
+          <div class="fnote2">基礎 10 支為保底量，若自然成效不佳，最多額外補到 15 支，不另收費，總價固定可控。</div>
+        </div>
+        <div class="flex-box b">
+          <div class="ftag">PLAN B 適用</div>
+          <div class="fttl">曝光計價・持續加碼到達標</div>
+          <div class="fval">30<small style="font-size:15px;color:var(--mute);"> 支封頂</small></div>
+          <div class="fnote2">曝光量未達標，我們會持續加碼製作，最多做到 30 支；若做滿 30 支仍未達曝光目標即結案。上限高、下限低，成效不好時反而可能比固定費更划算。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 PRICING -->
+  <section id="pricing">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">06 · 預算方案</div>
+      <h2>兩種計價方式，二擇一</h2>
+      <div class="plans">
+        <div class="plan">
+          <div class="ptag">PLAN A</div>
+          <div class="ptitle">整包執行費</div>
+          <div class="pprice">10<small> 萬元（未稅）</small></div>
+          <ul>
+            <li>固定總價，<b>不含授權費</b></li>
+            <li>包含 10 支影音＋10 篇脆文</li>
+            <li>視成效可加碼至 15 支影音</li>
+            <li>適合追求<b>預算可控</b>的客戶</li>
+          </ul>
+        </div>
+        <div class="plan highlight">
+          <div class="ptag">PLAN B</div>
+          <div class="ptitle">執行費＋曝光計價</div>
+          <div class="pprice">5<small> 萬元執行費 + 0.8 元／曝光</small></div>
+          <ul>
+            <li>曝光計價<b>上限 10 萬元（12.5 萬次曝光）</b>，超過不再計價</li>
+            <li>未達曝光目標會持續加碼，<b>最多做到 30 支</b>影音</li>
+            <li>包含 10 支影音＋10 篇脆文起</li>
+            <li>適合<b>看重曝光量、願意共擔成效</b>的客戶</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 CALCULATOR -->
+  <section id="calc" class="tone-sage">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow is-sage">07 · 曝光試算</div>
+      <h2>PLAN B 曝光試算表（可拖曳試算）</h2>
+      <div class="calc-wrap">
+        <div class="calc-slider">
+          <input type="range" id="impSlider" min="0" max="300000" step="5000" value="100000">
+        </div>
+        <div class="presets">
+          <button class="preset-btn" data-val="10000">1 萬次</button>
+          <button class="preset-btn" data-val="100000">10 萬次</button>
+          <button class="preset-btn" data-val="300000">30 萬次</button>
+        </div>
+        <div class="calc-readout">
+          <div class="ro"><div class="rolabel">預估曝光次數</div><div class="rovalue" id="roImp">100,000</div></div>
+          <div class="ro"><div class="rolabel">曝光計價金額（上限 10 萬）</div><div class="rovalue cap" id="roCap">80,000</div></div>
+          <div class="ro"><div class="rolabel">總計（未稅）</div><div class="rovalue total" id="roTotal">130,000</div></div>
+        </div>
+      </div>
+      <div class="calc-note">試算公式：5 萬執行費 ＋（曝光次數 × 0.8 元），其中曝光計價部分上限為 10 萬元（相當於 12.5 萬次曝光），超過則不再計價。以上為試算示意，實際結算以成效數據為準。</div>
+    </div>
+  </section>
+
+  <!-- 9 CLOSING -->
+  <section id="closing">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">08 · 聯繫窗口</div>
+      <h2 style="max-width:680px;">用 2 週的密度，把 Faisem 口噴香霧 送進日常對話裡</h2>
+      <div class="lede">從腳本、拍攝、剪輯、投稿到結案報告，QoooQ 一手包辦，讓您只需要專注在看成效。</div>
+      <div class="closing-cta">
+        <div class="contact-item"><b>提案窗口</b>takara@ilha.tw</div>
+        <div class="contact-item"><b>公司網站</b>qoooq.tw</div>
+        <div class="contact-item"><b>QoooQ 夸克創意股份有限公司</b>短影音 × KOC 整合行銷</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const sections = Array.from(document.querySelectorAll('section'));
+  const navdots = document.getElementById('navdots');
+  const slidecount = document.getElementById('slidecount');
+  sections.forEach((s)=>{
+    const b = document.createElement('button');
+    b.addEventListener('click', ()=> s.scrollIntoView({behavior:'smooth'}));
+    navdots.appendChild(b);
+  });
+  const dots = Array.from(navdots.children);
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = sections.indexOf(e.target);
+        dots.forEach(d=>d.classList.remove('active'));
+        dots[idx].classList.add('active');
+        slidecount.innerHTML = '<b>' + String(idx+1).padStart(2,'0') + '</b> / ' + sections.length;
+      }
+    });
+  }, {root: document.getElementById('deck'), threshold:0.6});
+  sections.forEach(s=>io.observe(s));
+
+  const slider = document.getElementById('impSlider');
+  const roImp = document.getElementById('roImp');
+  const roCap = document.getElementById('roCap');
+  const roTotal = document.getElementById('roTotal');
+  const EXEC_FEE = 50000;
+  const RATE = 0.8;
+  const CAP = 100000;
+
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+
+  function update(val){
+    const imp = Number(val);
+    const rawImpCost = imp * RATE;
+    const impCost = Math.min(rawImpCost, CAP);
+    const total = EXEC_FEE + impCost;
+    roImp.textContent = fmt(imp) + ' 次';
+    roCap.textContent = fmt(impCost) + ' 元' + (rawImpCost > CAP ? '（已達上限）' : '');
+    roTotal.textContent = fmt(total) + ' 元';
+    slider.value = imp;
+    document.querySelectorAll('.preset-btn').forEach(btn=>{
+      btn.classList.toggle('on', Number(btn.dataset.val) === imp);
+    });
+  }
+
+  slider.addEventListener('input', (e)=> update(e.target.value));
+  document.querySelectorAll('.preset-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> update(btn.dataset.val));
+  });
+  update(100000);
+</script>
+</body>
+</html>
