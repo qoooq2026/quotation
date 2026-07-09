@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025年上半期 vs 2026年上半期 収益分析 | VC事業と支援事業</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#17312C;
+  --deep-2:#0F221E;
+  --coral:#F2735B;
+  --coral-l:#FBE4DD;
+  --amber:#C98500;
+  --amber-l:#F7E8CC;
+  --bg:#F5F6F1;
+  --card:#FFFFFF;
+  --line:rgba(23,49,44,0.12);
+  --text:#12201C;
+  --text-2:#54625C;
+  --text-3:#8A948F;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Noto Sans JP',sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.num{font-family:'Space Mono',monospace;}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+header.hero{
+  background:var(--deep);
+  color:#EFEDE3;
+  padding:72px 0 56px;
+}
+header.hero .eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.12em;
+  color:var(--coral);
+  margin-bottom:18px;
+}
+header.hero h1{
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-weight:700;
+  font-size:34px;
+  line-height:1.5;
+  max-width:680px;
+  margin-bottom:20px;
+}
+header.hero p.sub{
+  color:#C7D0CB;
+  font-size:15px;
+  max-width:600px;
+  margin-bottom:44px;
+}
+.diverge{width:100%;max-width:640px;}
+.diverge .legend{display:flex;gap:24px;margin-top:12px;font-size:12px;color:#C7D0CB;}
+.diverge .legend span{display:flex;align-items:center;gap:6px;}
+.diverge .dot{width:9px;height:9px;border-radius:50%;}
+
+section{padding:56px 0;border-bottom:0.5px solid var(--line);}
+section:last-of-type{border-bottom:none;}
+h2{
+  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-weight:700;
+  font-size:21px;
+  margin-bottom:8px;
+}
+h2 .idx{font-family:'Space Mono',monospace;color:var(--coral);font-size:14px;margin-right:10px;}
+p.lead{color:var(--text-2);font-size:14.5px;max-width:640px;margin-bottom:28px;}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.kpi{background:var(--card);border:0.5px solid var(--line);border-radius:12px;padding:20px 18px;}
+.kpi .label{font-size:12.5px;color:var(--text-2);margin-bottom:10px;}
+.kpi .value{font-family:'Space Mono',monospace;font-weight:700;font-size:25px;}
+.kpi .value.up{color:#3B6D11;}
+.kpi .value.down{color:var(--coral);}
+.kpi .sub{font-size:11.5px;color:var(--text-3);margin-top:6px;}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px;}
+th,td{text-align:right;padding:11px 10px;border-bottom:0.5px solid var(--line);}
+th:first-child,td:first-child{text-align:left;}
+th{color:var(--text-2);font-weight:500;font-size:12.5px;}
+td.num,th.num{font-family:'Space Mono',monospace;}
+tr.total td{font-weight:700;border-top:1px solid var(--deep);border-bottom:none;padding-top:13px;}
+td.pos{color:#3B6D11;}
+td.neg{color:var(--coral);}
+
+.flagbox{background:var(--card);border:0.5px solid var(--line);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:18px 20px;margin-bottom:14px;}
+.flagbox h3{font-size:14.5px;font-weight:700;margin-bottom:6px;}
+.flagbox p{font-size:13.5px;color:var(--text-2);}
+
+.stepcard{display:flex;gap:16px;padding:18px 0;border-top:0.5px solid var(--line);}
+.stepcard:first-of-type{border-top:none;}
+.stepcard .n{font-family:'Space Mono',monospace;color:var(--coral);font-weight:700;font-size:14px;min-width:22px;}
+.stepcard p{font-size:13.5px;color:var(--text-2);}
+.stepcard strong{color:var(--text);font-weight:500;}
+
+.chartwrap{position:relative;width:100%;height:300px;margin-top:20px;}
+.chartlegend{display:flex;gap:18px;font-size:12px;color:var(--text-2);margin-top:22px;}
+.chartlegend span{display:flex;align-items:center;gap:6px;}
+.chartlegend .sq{width:10px;height:10px;border-radius:2px;}
+
+.thesisbar{background:var(--coral-l);border-radius:12px;padding:18px 22px;margin-bottom:26px;font-size:14.5px;}
+.thesisbar strong{color:#7A2B18;}
+
+footer{padding:40px 0 64px;font-size:12px;color:var(--text-3);}
+
+@media(max-width:640px){
+  header.hero h1{font-size:26px;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">CASH FLOW / BS / PL 分析レポート</p>
+    <h1>支援事業は伸びている。<br>崩れているのはVC事業のほうだ。</h1>
+    <p class="sub">2025年上半期(1〜6月)と2026年上半期(1〜6月)を比較。VC事業(健康食品)と支援事業(広告代理店業務)を分けて見ると、集団全体の現金悪化の原因が明確になる。</p>
+
+    <svg class="diverge" viewBox="0 0 640 160" role="img" aria-label="VC事業の利益寄与は下降、支援事業の利益は上昇し、2本の線が交差するグラフ">
+      <line x1="0" y1="20" x2="640" y2="20" stroke="rgba(239,237,227,0.12)" stroke-width="1"/>
+      <line x1="0" y1="80" x2="640" y2="80" stroke="rgba(239,237,227,0.2)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="0" y1="140" x2="640" y2="140" stroke="rgba(239,237,227,0.12)" stroke-width="1"/>
+      <path d="M40,50 C 250,55 420,90 600,130" fill="none" stroke="#4A7A5F" stroke-width="3" stroke-linecap="round"/>
+      <path d="M40,120 C 250,110 420,55 600,25" fill="none" stroke="#F2735B" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="50" r="5" fill="#4A7A5F"/>
+      <circle cx="600" cy="130" r="5" fill="#4A7A5F"/>
+      <circle cx="40" cy="120" r="5" fill="#F2735B"/>
+      <circle cx="600" cy="25" r="5" fill="#F2735B"/>
+      <text x="40" y="40" fill="#C7D0CB" font-size="11" font-family="Space Mono, monospace">VC 現金寄与</text>
+      <text x="600" y="150" fill="#C7D0CB" font-size="11" font-family="Space Mono, monospace" text-anchor="end">-230万元</text>
+      <text x="40" y="135" fill="#F2AA9C" font-size="11" font-family="Space Mono, monospace">支援事業 利益</text>
+      <text x="600" y="18" fill="#F2AA9C" font-size="11" font-family="Space Mono, monospace" text-anchor="end">+171万元</text>
+    </svg>
+    <div class="diverge legend">
+      <span><span class="dot" style="background:#4A7A5F"></span>VC事業(健康食品)</span>
+      <span><span class="dot" style="background:#F2735B"></span>支援事業(代理店業務)</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2><span class="idx">01</span>全体の数字</h2>
+    <p class="lead">単位はすべて万元(新台湾ドル、TWD)。2025年上半期(1〜6月)と2026年上半期(1〜6月)の比較。</p>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <p class="label">支援事業 利益成長</p>
+        <p class="value up">+518%</p>
+        <p class="sub num">27.7万元 → 171.0万元</p>
+      </div>
+      <div class="kpi">
+        <p class="label">支援事業 収入成長</p>
+        <p class="value up">+280%</p>
+        <p class="sub num">228万元 → 867万元</p>
+      </div>
+      <div class="kpi">
+        <p class="label">VC事業 収入成長</p>
+        <p class="value" style="color:var(--text-2)">+4%</p>
+        <p class="sub num">2,553万元 → 2,658万元</p>
+      </div>
+      <div class="kpi">
+        <p class="label">全社 現金増減の変化</p>
+        <p class="value down">-243万元</p>
+        <p class="sub num">+184万元 → -59万元</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="idx">02</span>収入・利益の比較</h2>
+    <p class="lead">VC事業の収入はほぼ横ばいなのに対し、支援事業は収入・利益ともに大きく伸びている。それでも全社の現金増減がマイナスに転じたのは、VC側のコスト膨張が原因。</p>
+    <div class="chartwrap">
+      <canvas id="cmp" role="img" aria-label="棒グラフ:VC収入、支援事業収入、支援事業利益、全社現金増減の2025年上半期と2026年上半期比較、単位は万元">VC収入は2553万元から2658万元。支援事業収入は228万元から867万元。支援事業利益は27.7万元から171万元。全社現金増減は184万元からマイナス59万元。</canvas>
+    </div>
+    <div class="chartlegend">
+      <span><span class="sq" style="background:#2a78d6"></span>2025年上半期</span>
+      <span><span class="sq" style="background:#eb6834"></span>2026年上半期</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="idx">03</span>コスト増加の内訳</h2>
+    <p class="lead">粗利益が下がった主因は、VC側の「マーケティング制作費」と「オフィス/会計費」の急増。広告費の伸び(+17.5%)より遥かに大きい。</p>
+    <table>
+      <thead>
+        <tr><th>費目</th><th class="num">2025年上半期</th><th class="num">2026年上半期</th><th class="num">増減</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>マーケティング制作費</td><td class="num">52万元</td><td class="num">408万元</td><td class="num neg">+356万元 (+686%)</td></tr>
+        <tr><td>オフィス/会計費</td><td class="num">84万元</td><td class="num">289万元</td><td class="num neg">+205万元 (+242%)</td></tr>
+        <tr><td>広告費</td><td class="num">812万元</td><td class="num">954万元</td><td class="num neg">+142万元 (+17.5%)</td></tr>
+        <tr><td>商品原価</td><td class="num">900万元</td><td class="num">971万元</td><td class="num neg">+71万元 (+7.9%)</td></tr>
+        <tr><td>フルフィルメント/決済費</td><td class="num">221万元</td><td class="num">253万元</td><td class="num neg">+32万元 (+14.6%)</td></tr>
+        <tr class="total"><td>全社 粗利益</td><td class="num">802万元</td><td class="num">681万元</td><td class="num neg">-121万元 (-15%)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="idx">04</span>データの整合性で確認すべき点</h2>
+    <p class="lead">CF表(現金ベース・全社集計)とPL/BS(発生主義・VC単体法人)は、そもそも集計範囲が違うため一致しなくて当然。ただし、以下の2点はエラーの可能性が高い。</p>
+    <div class="flagbox">
+      <h3>粗利益の数値が入金額とまったく同じ(2025年7月・8月)</h3>
+      <p>CF表の「粗利」行、2025年7月と8月の数値が、同じ月の「入金」行の数値と完全に一致している。粗利=入金は当月コストゼロを意味し、現実的にありえない。コピー&ペーストか数式参照のミスの可能性が高く、2025年の年間粗利集計・平均値を押し上げている。原本のセル数式を確認すること。</p>
+    </div>
+    <div class="flagbox">
+      <h3>広告費の二重計上リスク</h3>
+      <p>PLでは「製-広告費」が製造原価(COGS)側に計上されている(5月単月で218万元)。一方CF表には別立てで「広告合計」行がある。同じ支出が両方に計上されていないか、原本の集計ロジックを確認したほうがよい。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="idx">05</span>VC事業の正式決算(115年1〜5月)</h2>
+    <p class="lead">VC事業の法人(一樂鶴股份有限公司)の正式なBS/PLでも、同じ傾向がはっきり確認できる。</p>
+    <table>
+      <thead><tr><th>項目</th><th class="num">金額</th></tr></thead>
+      <tbody>
+        <tr><td>累計純損失(2026年1〜5月)</td><td class="num neg">-421.75万元</td></tr>
+        <tr><td>繰越欠損(前期以前)</td><td class="num neg">-167.24万元</td></tr>
+        <tr><td>保留利益合計</td><td class="num neg">-552万元</td></tr>
+        <tr><td>資本金+資本剰余金</td><td class="num">900万元</td></tr>
+        <tr class="total"><td>純資産(現在)</td><td class="num">348万元</td></tr>
+        <tr><td>5月単月 売上総損益(粗利)</td><td class="num neg">-61.5万元(粗利率 -9.7%)</td></tr>
+      </tbody>
+    </table>
+    <p class="lead" style="margin-top:20px;margin-bottom:0;">資本金+資本剰余金900万元が、すでに純資産348万元まで目減りしている。しかも5月は粗利段階で赤字。一過性ではなく、継続的な収益構造の問題として扱うべき。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="idx">06</span>支援事業の実証</h2>
+    <div class="thesisbar">「人件費を引いたら大した利益ではない」という説明は、数字と合わない。人件費+その他費用をすべて差し引いた<strong>純利益</strong>が5倍以上に伸びている。</div>
+    <table>
+      <thead><tr><th>指標</th><th class="num">2025年上半期</th><th class="num">2026年上半期</th><th class="num">増減</th></tr></thead>
+      <tbody>
+        <tr><td>収入</td><td class="num">228万元</td><td class="num">867万元</td><td class="num pos">+280%</td></tr>
+        <tr><td>人件費+その他費用</td><td class="num">200万元</td><td class="num">696万元</td><td class="num">+248%</td></tr>
+        <tr class="total"><td>純利益</td><td class="num">27.7万元</td><td class="num">171.0万元</td><td class="num pos">+518%</td></tr>
+        <tr><td>利益率</td><td class="num">12.1%</td><td class="num">19.7%</td><td class="num pos">+7.6pt</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="idx">07</span>交渉の進め方</h2>
+    <div class="stepcard">
+      <div class="n">01</div>
+      <p><strong>全社の現金増減ではなく、事業部別損益で話す。</strong>「人件費を引いたら収益が出ていない」という前提が数字と矛盾していることを、上の表で示す。</p>
+    </div>
+    <div class="stepcard">
+      <div class="n">02</div>
+      <p><strong>問題の所在をこちらから先に指摘する。</strong>マーケティング制作費・オフィス/会計費の急増と、VC単体の粗利率悪化・5月の粗損を証拠として提示する。責任転嫁ではなく、経営課題を見つけた立場として話す。</p>
+    </div>
+    <div class="stepcard">
+      <div class="n">03</div>
+      <p><strong>要求は「固定昇給」または「支援事業の成果連動インセンティブ」。</strong>支援事業は帰属も検証も明確で、単独で継続的に黒字成長しているため、全社ベースの昇給要求より説得力がある。</p>
+    </div>
+    <div class="stepcard">
+      <div class="n">04</div>
+      <p><strong>CF表の粗利計算エラーの指摘も添える。</strong>財務モデルの品質管理までできる、という印象を与えられる。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    数値は提供された画像(現金推移表・資産負債表・損益期間比較表)から手集計したものです。特に「2025年上半期」「2026年上半期」の月次内訳、按分ロジックは原本の数式で再確認することを推奨します。
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+new Chart(document.getElementById('cmp'), {
+  type: 'bar',
+  data: {
+    labels: ['VC 収入','支援事業 収入','支援事業 利益','全社 現金増減'],
+    datasets: [
+      { label: '2025年上半期', data: [2553,228,28,184], backgroundColor: '#2a78d6', borderRadius: 4, maxBarThickness: 30 },
+      { label: '2026年上半期', data: [2658,867,171,-59], backgroundColor: '#eb6834', borderRadius: 4, maxBarThickness: 30 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => c.dataset.label + '：' + c.parsed.y.toLocaleString() + ' 万元' } } },
+    scales: {
+      y: { title: { display: true, text: '万元(TWD)', color: '#8A948F', font: {size:11} }, grid: { color: '#e1e0d9' }, ticks: { color: '#8A948F' } },
+      x: { grid: { display: false }, ticks: { color: '#8A948F', font: {size:11.5} } }
+    }
+  }
+});
+</script>
+</body>
+</html>
