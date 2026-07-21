@@ -171,12 +171,30 @@
     .navdots{ display:none; }
     .slidecount{ display:none; }
     .deck{ scroll-snap-type:y proximity; }
-    section{ padding:9vh 6vw 7vh; }
+
+    /* center everything on mobile */
+    section{ padding:9vh 6vw 7vh; align-items:center; text-align:center; }
+    .content{ width:100%; display:flex; flex-direction:column; align-items:center; }
+    h1, h2{ text-align:center; }
+    .lede{ margin-left:auto; margin-right:auto; text-align:center; }
+    .eyebrow{ justify-content:center; }
+    .stat-row, .cadence, .platform-row, .plans, .branch-row, .rate-grid, .closing-cta{ justify-content:center; }
+    .bigstat{ justify-content:center; }
+    .notes-list{ margin-left:auto; margin-right:auto; text-align:left; width:100%; max-width:420px; }
+    .cover-tag{ margin-left:auto; margin-right:auto; }
+    .cover-badges{ justify-content:center; }
+
+    /* keep card body copy left-aligned for readability, but the card itself centered as a block */
+    .plan, .cond-card, .step-box, .branch-box, .outcome, .rate-box, .card{
+      text-align:left; width:100%; max-width:440px; margin-left:auto; margin-right:auto;
+    }
+    .plan ul, .plan li{ text-align:left; }
+
     h1{ font-size:clamp(28px,8vw,48px); }
     h2{ font-size:clamp(21px,5.6vw,30px); margin-bottom:20px; }
     .stat-row{ gap:32px; }
     .cadence, .platform-row{ gap:8px; }
-    .cover-meta{ flex-direction:column; align-items:flex-start; gap:8px; bottom:4vh; }
+    .cover-meta{ flex-direction:column; align-items:center; text-align:center; gap:8px; bottom:4vh; }
     .step-row{ flex-direction:column; align-items:stretch; }
     .step-arrow{ transform:rotate(90deg); text-align:center; }
     .bigstat .bval{ font-size:clamp(48px,16vw,72px); }
