@@ -34,14 +34,15 @@
     min-height:100vh; min-height:100dvh; width:100%;
     scroll-snap-align:start; scroll-snap-stop:always;
     position:relative;
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
     text-align:center;
-    padding:8vh 8vw;
+    padding:14vh 8vw 10vh;
     border-bottom:1px solid var(--line);
     overflow:visible;
     background:var(--ink-bg);
   }
   section.alt{ background:linear-gradient(180deg, var(--ink-bg), #201628); }
+  #cover, #closing{ justify-content:center; padding-top:8vh; }
 
   .grain{ position:absolute; inset:0; opacity:0.5; pointer-events:none; z-index:0;
     background-image:radial-gradient(rgba(245,237,240,0.03) 1px, transparent 1px); background-size:3px 3px; }
@@ -101,7 +102,7 @@
   .combo-total .ctval{ font-family:var(--serif); font-weight:900; font-size:24px; margin-top:8px; }
 
   /* schedule / bar chart */
-  .schedule-note{ font-size:13px; color:var(--mute); max-width:680px; margin:0 auto 30px; line-height:1.9; text-align:center; }
+  .schedule-note{ font-size:13px; color:var(--mute); max-width:640px; margin:0 auto 44px; line-height:1.9; text-align:center; }
   .chart-wrap{ display:flex; gap:0; width:100%; max-width:640px; justify-content:space-between; align-items:flex-end; height:240px; margin:0 auto; }
   .bar-col{ display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; }
   .bar-track{ display:flex; align-items:flex-end; height:220px; }
@@ -154,7 +155,7 @@
 <body>
 
 <div class="navdots" id="navdots"></div>
-<div class="slidecount" id="slidecount"><b>01</b> / 08</div>
+<div class="slidecount" id="slidecount"><b>01</b> / 09</div>
 
 <div class="deck" id="deck">
 
@@ -258,13 +259,29 @@
     </div>
   </section>
 
+  <!-- 4b PROOF CASE: COMMENT-TO-DM DIFFUSION -->
+  <section id="proof">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow is-rose">04 · 案例佐證：留言轉私訊擴散</div>
+      <h2>少量廣告費，換來病毒式的朋友圈觸及</h2>
+      <div class="stat-row">
+        <div class="stat"><div class="num">3,000<small style="font-size:16px;color:var(--mute);"> 元</small></div><div class="label">廣告花費</div></div>
+        <div class="stat"><div class="num">4.2 萬<small style="font-size:16px;color:var(--mute);"> 次</small></div><div class="label">自然流量</div></div>
+        <div class="stat"><div class="num">1,500<small style="font-size:16px;color:var(--mute);"> 次</small></div><div class="label">廣告點擊</div></div>
+        <div class="stat"><div class="num">55<small style="font-size:16px;color:var(--mute);"> 則</small></div><div class="label">真實留言轉私訊</div></div>
+      </div>
+      <div class="lede">單篇僅投入 3,000 元廣告費，就換來 4.2 萬次自然流量與 55 則真實私訊。關鍵在於擴散機制：消費者一旦留言，貼文就會被推送給該留言者的朋友圈觀看（Lookalike 效應），形成一層一層的病毒式擴散——這也是組合拳中「廣告帶動自然擴散曝光」預估值的實際依據。</div>
+    </div>
+  </section>
+
   <!-- 5 SCHEDULE / BAR CHART -->
   <section id="schedule">
     <div class="grain"></div>
     <div class="content">
-      <div class="eyebrow">04 · 檔期預算排程</div>
+      <div class="eyebrow">05 · 檔期預算排程</div>
       <h2>8 月最少、9–10 月預熱、11 月雙 11 衝高峰</h2>
-      <div class="schedule-note">依可選的三種短影音預算方案，搭配檔期節奏排程：8 月採方案 A 打底，9－10 月連續採方案 B 預熱蓄力，11 月雙 11 檔期全力衝刺採方案 C。若希望 10 月有更明確的階梯式增長，也可以再談一個介於 B、C 之間的自訂預算。</div>
+      <div class="schedule-note">8 月採方案 A 打底，9－10 月連續採方案 B 預熱蓄力，11 月雙 11 檔期全力衝刺採方案 C。若想讓 10 月更明顯地階梯增長，也可再談一個介於 B、C 之間的自訂預算。</div>
       <div class="chart-wrap">
         <div class="bar-col">
           <div class="bar-track"><div class="bar" style="height:118px;"></div></div>
@@ -296,7 +313,7 @@
   <section id="monthly-table" class="alt">
     <div class="grain"></div>
     <div class="content">
-      <div class="eyebrow is-rose">05 · 每月曝光與花費試算</div>
+      <div class="eyebrow is-rose">06 · 每月曝光與花費試算</div>
       <h2>4 個月完整試算表（預期效果）</h2>
       <div class="table-wrap">
         <table class="rate-table">
@@ -309,7 +326,7 @@
               <th>組合拳曝光</th>
               <th>月度總花費</th>
               <th>月度總曝光</th>
-              <th>綜合曝光單價</th>
+              <th>短影音曝光單價</th>
             </tr>
           </thead>
           <tbody>
@@ -321,7 +338,7 @@
               <td class="num">約 55 萬次</td>
               <td class="num">35 萬</td>
               <td class="num">約 88.3 萬次</td>
-              <td class="num">約 0.40 元</td>
+              <td class="num">0.6 元</td>
             </tr>
             <tr>
               <td>9 月</td>
@@ -331,7 +348,7 @@
               <td class="num">約 55 萬次</td>
               <td class="num">45 萬</td>
               <td class="num">約 109.5 萬次</td>
-              <td class="num">約 0.41 元</td>
+              <td class="num">0.55 元</td>
             </tr>
             <tr>
               <td>10 月</td>
@@ -341,7 +358,7 @@
               <td class="num">約 55 萬次</td>
               <td class="num">45 萬</td>
               <td class="num">約 109.5 萬次</td>
-              <td class="num">約 0.41 元</td>
+              <td class="num">0.55 元</td>
             </tr>
             <tr class="nov">
               <td><b>11 月（雙11）</b></td>
@@ -351,12 +368,12 @@
               <td class="num">約 55 萬次</td>
               <td class="num hi">65 萬</td>
               <td class="num hi">約 155 萬次</td>
-              <td class="num">約 0.42 元</td>
+              <td class="num hi">0.5 元</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="lede">曝光量為依單價與預算試算之預期效果，實際成效以投放數據為準；組合拳中廣告帶動的自然擴散曝光為預估值。</div>
+      <div class="lede">「短影音曝光單價」即隨月度預算級距下降的方案單價（0.6 → 0.55 → 0.5 元），預算越高、單價越划算；組合拳（脆＋廣告）維持每月固定 15 萬元、單價另計，不併入此欄。曝光量為依單價與預算試算之預期效果，實際成效以投放數據為準；廣告帶動的自然擴散曝光為預估值。</div>
     </div>
   </section>
 
@@ -364,7 +381,7 @@
   <section id="total">
     <div class="grain"></div>
     <div class="content">
-      <div class="eyebrow">06 · 4 個月總計</div>
+      <div class="eyebrow">07 · 4 個月總計</div>
       <h2>整體投入與預期成效</h2>
       <div class="total-grid">
         <div class="total-box">
@@ -378,9 +395,9 @@
           <div class="tonote">短影音約 242 萬次＋組合拳約 220 萬次</div>
         </div>
         <div class="total-box">
-          <div class="tolabel">平均綜合曝光單價</div>
-          <div class="toval">約 0.41 元</div>
-          <div class="tonote">全期加權平均</div>
+          <div class="tolabel">曝光量成長幅度</div>
+          <div class="toval">＋76%</div>
+          <div class="tonote">8 月（88.3 萬次）→ 11 月（155 萬次）</div>
         </div>
       </div>
       <div class="lede">從 8 月到 11 月，月度預算由 35 萬逐步墊高至雙 11 檔期的 65 萬（＋86%），曝光量同步由 88.3 萬次成長至 155 萬次（＋76%），符合「淡季打底、旺季衝刺」的檔期節奏。</div>
@@ -391,7 +408,7 @@
   <section id="closing">
     <div class="grain"></div>
     <div class="content">
-      <div class="eyebrow">07 · 聯繫窗口</div>
+      <div class="eyebrow">08 · 聯繫窗口</div>
       <h2 style="max-width:680px;">用 4 個月的節奏，把 AQILAH 髮本對策 送上雙 11 高峰</h2>
       <div class="lede">短影音、脆文、廣告擴散三軌並行，QoooQ 團隊將依實際成效每月調整優化，確保曝光效率與知名度累積同步成長。</div>
       <div class="closing-cta">
