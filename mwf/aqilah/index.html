@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AQILAH 髮本對策 × QoooQ 季度媒體提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-bg:#1B1420;
+    --panel:#26192C;
+    --panel-2:#301F38;
+    --line:rgba(245,237,240,0.10);
+    --line-strong:rgba(245,237,240,0.20);
+    --rose:#D98CA3;
+    --rose-dim:rgba(217,140,163,0.14);
+    --gold:#C9A15A;
+    --gold-dim:rgba(201,161,90,0.16);
+    --ink:#F5EDF0;
+    --mute:#A08E97;
+    --mute-2:#6B5C63;
+    --serif:'Noto Serif TC', serif;
+    --sans:'Noto Sans TC', sans-serif;
+    --mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--ink-bg); color:var(--ink); font-family:var(--sans); overflow-x:hidden; }
+  ::selection{ background:var(--gold); color:#241A28; }
+
+  .deck{ height:100vh; height:100dvh; overflow-y:scroll; scroll-snap-type:y mandatory; }
+  section{
+    min-height:100vh; min-height:100dvh; width:100%;
+    scroll-snap-align:start; scroll-snap-stop:always;
+    position:relative;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:8vh 8vw;
+    border-bottom:1px solid var(--line);
+    overflow:visible;
+    background:var(--ink-bg);
+  }
+  section.alt{ background:linear-gradient(180deg, var(--ink-bg), #201628); }
+
+  .grain{ position:absolute; inset:0; opacity:0.5; pointer-events:none; z-index:0;
+    background-image:radial-gradient(rgba(245,237,240,0.03) 1px, transparent 1px); background-size:3px 3px; }
+  .content{ position:relative; z-index:2; width:100%; max-width:1040px; display:flex; flex-direction:column; align-items:center; }
+
+  .eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:0.24em; color:var(--gold);
+    text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; justify-content:center; gap:10px; }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--gold); }
+  .eyebrow.is-rose{ color:var(--rose); }
+  .eyebrow.is-rose::before{ background:var(--rose); }
+
+  h1{ font-family:var(--serif); font-weight:900; font-size:clamp(30px,5vw,62px); line-height:1.35; text-align:center; }
+  h2{ font-family:var(--serif); font-weight:700; font-size:clamp(22px,2.8vw,38px); line-height:1.45; margin-bottom:26px; text-align:center; }
+  .lede{ font-size:clamp(14px,1.25vw,17.5px); color:var(--mute); max-width:660px; line-height:2; margin:16px auto 0; text-align:center; }
+
+  .cover-tag{ font-family:var(--mono); font-size:12px; color:var(--mute); letter-spacing:0.06em; margin:26px auto 0; max-width:600px; line-height:1.9; text-align:center; }
+  .cover-badges{ display:flex; gap:10px; margin-top:28px; flex-wrap:wrap; justify-content:center; }
+  .cover-badge{ font-family:var(--sans); font-size:12.5px; padding:8px 16px; border:1px solid var(--line-strong); border-radius:999px; color:var(--ink); background:var(--panel); }
+  .cover-meta{ position:absolute; bottom:6vh; left:8vw; right:8vw; display:flex; justify-content:space-between;
+    align-items:flex-end; font-family:var(--mono); font-size:11px; color:var(--mute-2); z-index:2; }
+  .cover-meta .brand{ color:var(--ink); font-weight:500; }
+
+  .navdots{ position:fixed; right:28px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:12px; z-index:50; }
+  .navdots button{ width:8px; height:8px; border-radius:50%; border:1px solid var(--mute-2); background:transparent; cursor:pointer; padding:0; transition:all .25s; }
+  .navdots button.active{ background:var(--gold); border-color:var(--gold); transform:scale(1.3); }
+  .slidecount{ position:fixed; left:28px; bottom:26px; z-index:50; font-family:var(--mono); font-size:12px; color:var(--mute-2); }
+  .slidecount b{ color:var(--ink); }
+
+  .stat-row{ display:flex; gap:44px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
+  .stat{ min-width:140px; }
+  .stat .num{ font-family:var(--serif); font-weight:900; font-size:clamp(30px,3.6vw,52px); color:var(--gold); line-height:1.15; }
+  .stat .label{ font-family:var(--mono); font-size:11px; color:var(--mute); margin-top:10px; letter-spacing:0.04em; }
+
+  /* three-tier plan cards */
+  .tier-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:10px; width:100%; max-width:920px; }
+  .tier{ background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px 22px; text-align:left; }
+  .tier.mid{ border-color:var(--rose); }
+  .tier.top{ border-color:var(--gold); background:linear-gradient(180deg, var(--gold-dim), var(--panel) 55%); }
+  .tier .ttag{ font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:0.06em; }
+  .tier .tbudget{ font-family:var(--serif); font-weight:900; font-size:26px; color:var(--ink); margin-top:10px; }
+  .tier .trate{ font-family:var(--mono); font-size:12.5px; color:var(--mute); margin-top:6px; }
+  .tier .texp{ font-family:var(--mono); font-size:22px; color:var(--gold); margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); }
+  .tier.top .texp{ color:var(--gold); }
+  .tier .texp small{ font-family:var(--sans); font-size:12px; color:var(--mute); display:block; margin-top:4px; }
+
+  /* combo section */
+  .combo-grid{ display:flex; gap:20px; margin-top:10px; flex-wrap:wrap; justify-content:center; width:100%; }
+  .combo-box{ flex:1; min-width:280px; max-width:460px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:28px; text-align:left; }
+  .combo-box .cbtag{ font-family:var(--mono); font-size:11px; color:var(--rose); letter-spacing:0.08em; }
+  .combo-box .cbtitle{ font-family:var(--serif); font-weight:700; font-size:19px; margin-top:8px; }
+  .combo-box ul{ list-style:none; margin-top:16px; }
+  .combo-box li{ font-size:13.5px; color:var(--mute); padding:8px 0; border-bottom:1px dashed var(--line); line-height:1.7; }
+  .combo-box li:last-child{ border-bottom:none; }
+  .combo-box li b{ color:var(--ink); font-weight:500; }
+  .combo-total{ margin-top:24px; padding:18px 22px; background:var(--gold-dim); border:1px solid var(--gold); border-radius:12px; text-align:left; width:100%; max-width:940px; }
+  .combo-total .ctlabel{ font-family:var(--mono); font-size:11px; color:var(--gold); letter-spacing:0.06em; }
+  .combo-total .ctval{ font-family:var(--serif); font-weight:900; font-size:24px; margin-top:8px; }
+
+  /* schedule / bar chart */
+  .schedule-note{ font-size:13px; color:var(--mute); max-width:680px; margin:0 auto 30px; line-height:1.9; text-align:center; }
+  .chart-wrap{ display:flex; gap:0; width:100%; max-width:640px; justify-content:space-between; align-items:flex-end; height:240px; margin:0 auto; }
+  .bar-col{ display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; }
+  .bar-track{ display:flex; align-items:flex-end; height:220px; }
+  .bar{ width:52px; border-radius:8px 8px 0 0; background:linear-gradient(180deg, var(--rose), var(--panel-2)); position:relative; }
+  .bar.peak{ background:linear-gradient(180deg, var(--gold), var(--panel-2)); }
+  .bar-val{ font-family:var(--mono); font-size:12px; color:var(--ink); margin-bottom:6px; }
+  .bar-label{ font-family:var(--sans); font-size:12.5px; color:var(--mute); margin-top:4px; }
+  .bar-label b{ color:var(--ink); }
+  .bar-flag{ font-family:var(--mono); font-size:10px; color:var(--gold); margin-top:2px; letter-spacing:0.04em; }
+
+  /* data table */
+  .table-wrap{ width:100%; overflow-x:auto; margin-top:10px; }
+  table.rate-table{ width:100%; border-collapse:collapse; min-width:720px; font-size:13px; }
+  table.rate-table th{ font-family:var(--mono); font-size:11px; letter-spacing:0.04em; color:var(--mute); text-align:left; padding:12px 14px; border-bottom:1px solid var(--line-strong); }
+  table.rate-table td{ padding:14px 14px; border-bottom:1px solid var(--line); text-align:left; }
+  table.rate-table tr:last-child td{ border-bottom:none; }
+  table.rate-table tr.nov td{ background:var(--gold-dim); }
+  table.rate-table td.num{ font-family:var(--mono); }
+  table.rate-table td.hi{ color:var(--gold); font-weight:700; }
+
+  /* totals */
+  .total-grid{ display:flex; gap:24px; margin-top:10px; flex-wrap:wrap; justify-content:center; }
+  .total-box{ min-width:220px; background:var(--panel); border:1px solid var(--gold); border-radius:16px; padding:30px; text-align:center; background:linear-gradient(180deg, var(--gold-dim), var(--panel) 55%); }
+  .total-box .tolabel{ font-family:var(--mono); font-size:11px; color:var(--mute); letter-spacing:0.06em; }
+  .total-box .toval{ font-family:var(--serif); font-weight:900; font-size:clamp(28px,3.2vw,42px); color:var(--gold); margin-top:12px; }
+  .total-box .tonote{ font-size:12px; color:var(--mute); margin-top:10px; }
+
+  #closing{ justify-content:center; }
+  .closing-cta{ margin-top:36px; display:flex; gap:40px; flex-wrap:wrap; justify-content:center; }
+  .contact-item{ font-family:var(--mono); font-size:13.5px; color:var(--mute); }
+  .contact-item b{ color:var(--ink); display:block; font-family:var(--serif); font-weight:700; font-size:15px; margin-bottom:6px; }
+
+  @media (max-width:860px){
+    .tier-grid, .table-wrap{ grid-template-columns:1fr; }
+    .navdots{ display:none; }
+    .slidecount{ display:none; }
+    .deck{ scroll-snap-type:y proximity; }
+    section{ padding:9vh 6vw 7vh; }
+    h1{ font-size:clamp(26px,7.4vw,40px); }
+    h2{ font-size:clamp(19px,5.2vw,26px); margin-bottom:20px; }
+    .tier-grid{ grid-template-columns:1fr; max-width:420px; }
+    .cover-meta{ flex-direction:column; align-items:center; text-align:center; gap:8px; bottom:4vh; }
+    .chart-wrap{ height:200px; }
+    .bar-track{ height:180px; }
+    .bar{ width:36px; }
+    table.rate-table{ font-size:12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="navdots" id="navdots"></div>
+<div class="slidecount" id="slidecount"><b>01</b> / 08</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 COVER -->
+  <section id="cover">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">美吾華集團 <span style="color:var(--mute-2)">/</span> AQILAH 髮本對策</div>
+      <h1>短影音 × 脆 × 廣告擴散</h1>
+      <h1 style="color:var(--gold); margin-top:6px;">8–11 月 季度媒體提案</h1>
+      <div class="cover-tag">4 個月漸進式預算配置，鎖定雙 11 檔期衝上全年高峰，從知名度累積到自然曝光極大化。</div>
+      <div class="cover-badges">
+        <div class="cover-badge">目標：知名度＋自然曝光</div>
+        <div class="cover-badge">誘導：線下店鋪＋留言轉私訊</div>
+        <div class="cover-badge">執行：短影音＋脆＋廣告擴散</div>
+      </div>
+    </div>
+    <div class="cover-meta">
+      <div>提案日期 <span class="brand">2026.07</span></div>
+      <div class="brand">QoooQ TAIWAN</div>
+      <div>Scroll ↓</div>
+    </div>
+  </section>
+
+  <!-- 2 OVERVIEW -->
+  <section id="overview" class="alt">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">01 · 專案總覽</div>
+      <h2>4 個月的曝光累積戰，為雙 11 蓄力</h2>
+      <div class="stat-row">
+        <div class="stat"><div class="num">8–11 月</div><div class="label">EXECUTION PERIOD · 4 個月</div></div>
+        <div class="stat"><div class="num">短影音＋脆＋廣告</div><div class="label">CHANNEL MIX</div></div>
+        <div class="stat"><div class="num">雙 11</div><div class="label">PEAK CAMPAIGN MONTH</div></div>
+      </div>
+      <div class="lede">主要目標是拉高品牌知名度與自然曝光量，透過線下店鋪導購與「留言轉私訊」的線上誘導機制，讓 AQILAH 髮本對策在 8 月至 11 月間逐步累積聲量，並在雙 11 檔期迎來全年最大一波曝光高峰。</div>
+    </div>
+  </section>
+
+  <!-- 3 SHORT VIDEO 3 TIERS -->
+  <section id="sv-tiers">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">02 · 短影音 三種預算方案</div>
+      <h2>預算越高，曝光單價越划算</h2>
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="ttag">方案 A</div>
+          <div class="tbudget">20 萬元／月</div>
+          <div class="trate">曝光單價 0.6 元／次</div>
+          <div class="texp">約 33.3 萬次<small>目標曝光量</small></div>
+        </div>
+        <div class="tier mid">
+          <div class="ttag">方案 B</div>
+          <div class="tbudget">30 萬元／月</div>
+          <div class="trate">曝光單價 0.55 元／次</div>
+          <div class="texp">約 54.5 萬次<small>目標曝光量</small></div>
+        </div>
+        <div class="tier top">
+          <div class="ttag">方案 C</div>
+          <div class="tbudget">50 萬元／月</div>
+          <div class="trate">曝光單價 0.5 元／次</div>
+          <div class="texp">100 萬次<small>目標曝光量</small></div>
+        </div>
+      </div>
+      <div class="lede">三種方案為每月短影音廣告預算的彈性選項，依檔期需求對應搭配（詳見「檔期預算排程」）。</div>
+    </div>
+  </section>
+
+  <!-- 4 COMBO: THREADS + ADS -->
+  <section id="combo" class="alt">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow is-rose">03 · 組合拳：脆 ＋ 廣告擴散</div>
+      <h2>每月額外 15 萬元，做脆文曝光與擴散型廣告</h2>
+      <div class="combo-grid">
+        <div class="combo-box">
+          <div class="cbtag">脆 THREADS · 曝光計價</div>
+          <div class="cbtitle">脆文曝光方案</div>
+          <ul>
+            <li>單次曝光 <b>0.4 元</b></li>
+            <li>月度預算上限 <b>10 萬元</b></li>
+            <li>目標曝光 <b>25 萬次／月</b></li>
+          </ul>
+        </div>
+        <div class="combo-box">
+          <div class="cbtag">廣告 · 擴散導向</div>
+          <div class="cbtitle">留言轉私訊廣告</div>
+          <ul>
+            <li>每日投放 <b>1,000–2,000 元</b></li>
+            <li>月度預算上限 <b>5 萬元</b></li>
+            <li>非 CV 導向，以<b>擴散＋留言互動</b>誘導私訊，同步可發送優惠連結帶動線上業績</li>
+            <li>預估 5 萬元廣告費可帶出<b>超過 30 萬次</b>自然擴散曝光</li>
+          </ul>
+        </div>
+      </div>
+      <div class="combo-total">
+        <div class="ctlabel">組合拳月度合計</div>
+        <div class="ctval">15 萬元支出 → 約 55 萬次曝光（脆 25 萬＋廣告自然擴散 30 萬＋）</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 SCHEDULE / BAR CHART -->
+  <section id="schedule">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">04 · 檔期預算排程</div>
+      <h2>8 月最少、9–10 月預熱、11 月雙 11 衝高峰</h2>
+      <div class="schedule-note">依可選的三種短影音預算方案，搭配檔期節奏排程：8 月採方案 A 打底，9－10 月連續採方案 B 預熱蓄力，11 月雙 11 檔期全力衝刺採方案 C。若希望 10 月有更明確的階梯式增長，也可以再談一個介於 B、C 之間的自訂預算。</div>
+      <div class="chart-wrap">
+        <div class="bar-col">
+          <div class="bar-track"><div class="bar" style="height:118px;"></div></div>
+          <div class="bar-val">35 萬</div>
+          <div class="bar-label">8 月<br><b>方案 A</b></div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-track"><div class="bar" style="height:152px;"></div></div>
+          <div class="bar-val">45 萬</div>
+          <div class="bar-label">9 月<br><b>方案 B</b></div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-track"><div class="bar" style="height:152px;"></div></div>
+          <div class="bar-val">45 萬</div>
+          <div class="bar-label">10 月<br><b>方案 B</b></div>
+        </div>
+        <div class="bar-col">
+          <div class="bar-track"><div class="bar peak" style="height:220px;"></div></div>
+          <div class="bar-val" style="color:var(--gold);">65 萬</div>
+          <div class="bar-label">11 月<br><b>方案 C</b></div>
+          <div class="bar-flag">★ 雙 11 峰值</div>
+        </div>
+      </div>
+      <div class="lede">單位：萬元／月，含短影音廣告預算＋組合拳（脆＋廣告）15 萬元。</div>
+    </div>
+  </section>
+
+  <!-- 6 MONTHLY TABLE -->
+  <section id="monthly-table" class="alt">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow is-rose">05 · 每月曝光與花費試算</div>
+      <h2>4 個月完整試算表（預期效果）</h2>
+      <div class="table-wrap">
+        <table class="rate-table">
+          <thead>
+            <tr>
+              <th>月份</th>
+              <th>短影音預算</th>
+              <th>短影音曝光</th>
+              <th>組合拳預算</th>
+              <th>組合拳曝光</th>
+              <th>月度總花費</th>
+              <th>月度總曝光</th>
+              <th>綜合曝光單價</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>8 月</td>
+              <td class="num">20 萬</td>
+              <td class="num">約 33.3 萬次</td>
+              <td class="num">15 萬</td>
+              <td class="num">約 55 萬次</td>
+              <td class="num">35 萬</td>
+              <td class="num">約 88.3 萬次</td>
+              <td class="num">約 0.40 元</td>
+            </tr>
+            <tr>
+              <td>9 月</td>
+              <td class="num">30 萬</td>
+              <td class="num">約 54.5 萬次</td>
+              <td class="num">15 萬</td>
+              <td class="num">約 55 萬次</td>
+              <td class="num">45 萬</td>
+              <td class="num">約 109.5 萬次</td>
+              <td class="num">約 0.41 元</td>
+            </tr>
+            <tr>
+              <td>10 月</td>
+              <td class="num">30 萬</td>
+              <td class="num">約 54.5 萬次</td>
+              <td class="num">15 萬</td>
+              <td class="num">約 55 萬次</td>
+              <td class="num">45 萬</td>
+              <td class="num">約 109.5 萬次</td>
+              <td class="num">約 0.41 元</td>
+            </tr>
+            <tr class="nov">
+              <td><b>11 月（雙11）</b></td>
+              <td class="num hi">50 萬</td>
+              <td class="num hi">100 萬次</td>
+              <td class="num">15 萬</td>
+              <td class="num">約 55 萬次</td>
+              <td class="num hi">65 萬</td>
+              <td class="num hi">約 155 萬次</td>
+              <td class="num">約 0.42 元</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lede">曝光量為依單價與預算試算之預期效果，實際成效以投放數據為準；組合拳中廣告帶動的自然擴散曝光為預估值。</div>
+    </div>
+  </section>
+
+  <!-- 7 4-MONTH TOTAL -->
+  <section id="total">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">06 · 4 個月總計</div>
+      <h2>整體投入與預期成效</h2>
+      <div class="total-grid">
+        <div class="total-box">
+          <div class="tolabel">總預算投入</div>
+          <div class="toval">190 萬元</div>
+          <div class="tonote">短影音 130 萬＋組合拳 60 萬（未稅）</div>
+        </div>
+        <div class="total-box">
+          <div class="tolabel">預期總曝光量</div>
+          <div class="toval">約 462 萬次</div>
+          <div class="tonote">短影音約 242 萬次＋組合拳約 220 萬次</div>
+        </div>
+        <div class="total-box">
+          <div class="tolabel">平均綜合曝光單價</div>
+          <div class="toval">約 0.41 元</div>
+          <div class="tonote">全期加權平均</div>
+        </div>
+      </div>
+      <div class="lede">從 8 月到 11 月，月度預算由 35 萬逐步墊高至雙 11 檔期的 65 萬（＋86%），曝光量同步由 88.3 萬次成長至 155 萬次（＋76%），符合「淡季打底、旺季衝刺」的檔期節奏。</div>
+    </div>
+  </section>
+
+  <!-- 8 CLOSING -->
+  <section id="closing">
+    <div class="grain"></div>
+    <div class="content">
+      <div class="eyebrow">07 · 聯繫窗口</div>
+      <h2 style="max-width:680px;">用 4 個月的節奏，把 AQILAH 髮本對策 送上雙 11 高峰</h2>
+      <div class="lede">短影音、脆文、廣告擴散三軌並行，QoooQ 團隊將依實際成效每月調整優化，確保曝光效率與知名度累積同步成長。</div>
+      <div class="closing-cta">
+        <div class="contact-item"><b>提案窗口</b>takara@ilha.tw</div>
+        <div class="contact-item"><b>公司網站</b>qoooq.tw</div>
+        <div class="contact-item"><b>QoooQ 夸克創意股份有限公司</b>短影音 × KOC 整合行銷</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const sections = Array.from(document.querySelectorAll('section'));
+  const navdots = document.getElementById('navdots');
+  const slidecount = document.getElementById('slidecount');
+  sections.forEach((s)=>{
+    const b = document.createElement('button');
+    b.addEventListener('click', ()=> s.scrollIntoView({behavior:'smooth'}));
+    navdots.appendChild(b);
+  });
+  const dots = Array.from(navdots.children);
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx = sections.indexOf(e.target);
+        dots.forEach(d=>d.classList.remove('active'));
+        dots[idx].classList.add('active');
+        slidecount.innerHTML = '<b>' + String(idx+1).padStart(2,'0') + '</b> / ' + sections.length;
+      }
+    });
+  }, {root: document.getElementById('deck'), threshold:0.6});
+  sections.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
