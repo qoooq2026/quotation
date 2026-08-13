@@ -354,7 +354,7 @@
         <div class="plan">
           <div class="ptag">PLAN A</div>
           <div class="ptitle">整包執行費</div>
-          <div class="pprice">10<small> 萬元（未稅）</small></div>
+          <div class="pprice">15<small> 萬元（未稅）</small></div>
           <ul>
             <li>固定總價，<b>不含授權費</b></li>
             <li>包含 10 支影音＋10 篇脆文</li>
@@ -365,9 +365,9 @@
         <div class="plan highlight">
           <div class="ptag">PLAN B</div>
           <div class="ptitle">執行費＋曝光計價</div>
-          <div class="pprice">5<small> 萬元執行費 + 0.8 元／曝光</small></div>
+          <div class="pprice">5<small> 萬元執行費 + 1.2 元／曝光</small></div>
           <ul>
-            <li>曝光計價<b>上限 10 萬元（12.5 萬次曝光）</b>，超過不再計價</li>
+            <li>曝光計價<b>上限 15 萬元（12.5 萬次曝光）</b>，超過不再計價</li>
             <li>未達曝光目標會持續加碼，<b>最多做到 30 支</b>影音</li>
             <li>包含 10 支影音＋10 篇脆文起</li>
             <li>適合<b>看重曝光量、願意共擔成效</b>的客戶</li>
@@ -394,11 +394,11 @@
         </div>
         <div class="calc-readout">
           <div class="ro"><div class="rolabel">預估曝光次數</div><div class="rovalue" id="roImp">100,000</div></div>
-          <div class="ro"><div class="rolabel">曝光計價金額（上限 10 萬）</div><div class="rovalue cap" id="roCap">80,000</div></div>
-          <div class="ro"><div class="rolabel">總計（未稅）</div><div class="rovalue total" id="roTotal">130,000</div></div>
+          <div class="ro"><div class="rolabel">曝光計價金額（上限 15 萬）</div><div class="rovalue cap" id="roCap">120,000</div></div>
+          <div class="ro"><div class="rolabel">總計（未稅）</div><div class="rovalue total" id="roTotal">170,000</div></div>
         </div>
       </div>
-      <div class="calc-note">試算公式：5 萬執行費 ＋（曝光次數 × 0.8 元），其中曝光計價部分上限為 10 萬元（相當於 12.5 萬次曝光），超過則不再計價。以上為試算示意，實際結算以成效數據為準。</div>
+      <div class="calc-note">試算公式：5 萬執行費 ＋（曝光次數 × 1.2 元），其中曝光計價部分上限為 15 萬元（相當於 12.5 萬次曝光），超過則不再計價。以上為試算示意，實際結算以成效數據為準。</div>
     </div>
   </section>
 
@@ -447,8 +447,8 @@
   const roCap = document.getElementById('roCap');
   const roTotal = document.getElementById('roTotal');
   const EXEC_FEE = 50000;
-  const RATE = 0.8;
-  const CAP = 100000;
+  const RATE = 1.2;
+  const CAP = 150000;
 
   function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
 
